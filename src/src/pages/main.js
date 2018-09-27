@@ -3,50 +3,93 @@ import { StyleSheet, Text, View, Button,Alert, Image} from 'react-native';
 import {Header, Container} from "native-base";
 
 
-
-export default class Main extends Component{
-
-    static navigationOptions ={
-        title:"Trampo",
-        
-    };
-
-  render() {
-    return (
-      <Container>
+const Main =({navigation}) => (
+  <Container>
         {/* <Header style={styles.header}><Text style ={styles.textHeader}>Trampo</Text></Header> */}
-        <View style={styles.perfis}>
+        
+        <View style={styles.containerImage}>
+          
+         <Image 
+          style = {styles.logo}
+         source={require('./../assets/trampo.png')}
+         
+         />   
+          
+          <View style={styles.perfis}>
         <Button 
           large
           color='darkgrey' 
-          title='Cliente'
+          title='Visitar'
           
-          onPress={() => {Alert.alert('You tapped the button!');}}> 
-            
+          // onPress={() => {navigation.navigate('Buscar');}}> 
+           > 
           </Button>
           <Button
             large
             
             color='darkgrey'  
-            title='Prestador' 
-            onPress={() => navigation.navigate(<Login></Login>)}
+            title='Login' 
+            onPress={() => navigation.navigate('Login')}
             />
              
         </View>
-        <View style={styles.containerImage}>
-          
-         <Image 
-         style = {styles.logo}
-         source={require('./../assets/trampo.png')}
-         
-         />   
-          
-          
+
         </View>
       </Container>
     );
-  }
+
+
+// export default class Main extends Component{
+
+//     static navigationOptions ={
+//         title:"Trampo",
+        
+//     };
+
+//   render() {
+//     return (
+//       <Container>
+//         {/* <Header style={styles.header}><Text style ={styles.textHeader}>Trampo</Text></Header> */}
+//         <View style={styles.perfis}>
+//         <Button 
+//           large
+//           color='darkgrey' 
+//           title='Cliente'
+          
+//           onPress={() => {Alert.alert('You tapped the button!');}}> 
+            
+//           </Button>
+//           <Button
+//             large
+            
+//             color='darkgrey'  
+//             title='Prestador' 
+//             onPress={() => navigation.navigate(Login)}
+//             />
+             
+//         </View>
+//         <View style={styles.containerImage}>
+          
+//          <Image 
+//          style = {styles.logo}
+//          source={require('./../assets/trampo.png')}
+         
+//          />   
+          
+          
+//         </View>
+//       </Container>
+//     );
+//   }
+// }
+
+Main.navigationOptions = {
+  title: 'Trampo',
 }
+
+
+export default Main;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -73,11 +116,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
   },
   perfis:{
-    top: 10,
-    alignItems: 'center',
-    flexDirection: 'row',
-    padding:10,
-    justifyContent: 'space-between',
+    flex:1,
+    flexDirection: 'column',
+    margin: 100,
+    marginTop:100,
+    width: 100,
+    height:100,
+    justifyContent:'space-between',
   },
   logo:{
     top:10,

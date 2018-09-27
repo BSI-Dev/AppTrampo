@@ -1,11 +1,14 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, StackNavigator } from 'react-navigation';
+
 
 import Main from './pages/main';
 import Login from './pages/Login/Login';
+// import Buscar from './pages/Buscar/Buscar';
 
 export default createStackNavigator({
-    Main,
-    Login:Login,
+    Main: Main,
+    Login: Login,
+    // Buscar: Buscar,
 }, {
     navigationOptions:{
         headerStyle: {
@@ -16,3 +19,20 @@ export default createStackNavigator({
     }
 
 });
+
+
+
+// export const RootApp = StackNavigator({
+//     Main:{ screen: Main,
+//         navigationOptions:{
+//                      headerStyle: {
+//                      backgroundColor:"green",
+                        
+//                      },
+//                      headerTintColor: "white"
+//                  }
+//     },
+//     Login:{screen: Login,
+
+//     },
+// });
