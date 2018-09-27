@@ -1,23 +1,20 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button,Alert, Image} from 'react-native';
+import { StyleSheet, Text, View, Button,Alert, Image} from 'react-native';
 import {Header, Container} from "native-base";
 
 
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class Main extends Component{
+
+    static navigationOptions ={
+        title:"Trampo",
+        
+    };
+
   render() {
     return (
       <Container>
-        <Header style={styles.header}><Text style ={styles.textHeader}>Trampo</Text></Header>
+        {/* <Header style={styles.header}><Text style ={styles.textHeader}>Trampo</Text></Header> */}
         <View style={styles.perfis}>
         <Button 
           large
@@ -31,16 +28,16 @@ export default class App extends Component<Props> {
             large
             
             color='darkgrey'  
-            title='Prestador' onPress={() => {
-            Alert.alert('You tapped the button!');
-            }}>
-            </Button> 
+            title='Prestador' 
+            onPress={() => navigation.navigate(<Login></Login>)}
+            />
+             
         </View>
         <View style={styles.containerImage}>
           
          <Image 
          style = {styles.logo}
-         source={require('./assets/trampo.png')}
+         source={require('./../assets/trampo.png')}
          
          />   
           
