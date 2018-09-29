@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button,Alert, Image} from 'react-native';
+import { StyleSheet, View, Button, Image} from 'react-native';
 import {Header, Container} from "native-base";
 
 
@@ -21,7 +21,7 @@ const Main =({navigation}) => (
           color='darkgrey' 
           title='Visitar'
           
-          // onPress={() => {navigation.navigate('Buscar');}}> 
+           onPress={() => {navigation.navigate('Visitar');}}> 
            > 
           </Button>
           <Button

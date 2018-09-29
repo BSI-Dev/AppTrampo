@@ -1,14 +1,32 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button,Alert, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View,FlatList, Button,Alert, Image} from 'react-native';
 import {Header, Container} from "native-base";
+import api from './../../services/api';
 
 
-export default class App extends Component {
+export default class Buscar extends Component {
+
+  static navigationOptions ={
+    title:"Trampo"
+  };
+  //toda vez que há variação de estado, o método render é executado
+  state = {
+
+  };
+
+  componentDidMount(){
+    this.loadAnuncios();
+  }
+  //utilizando arrowfunction para poder enxergar o 'this'
+  loadAnuncios = async () => {
+    const response = await api.get(); //colocar o caminho a partir da baseUrl que é pra buscar os itens
+    
+  };
+
   render() {
     return (
       <Container>
-        <Header style={styles.header}><Text style ={styles.textHeader}>Trampo</Text></Header>
-        <Text>TESTE        </Text>
+        <FlatList></FlatList>
       </Container>
     );
   }
