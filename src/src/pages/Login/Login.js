@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, KeyboardAvoidingView, Text, Image} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, Text, Image, TouchableOpacity} from 'react-native';
 import LoginForm from './LoginForm';
 
 export default class Login extends Component{
@@ -12,8 +12,13 @@ export default class Login extends Component{
                           
                 <LoginForm />
                 <View style={styles.cadastroTextContent}>
-                    <Text style={styles.cadastroText}>Não tem cadastro? Faça seu cadastro aqui.</Text>
+                    <Text style={styles.cadastroText}>Não tem cadastro? Faça seu cadastro </Text>
+                    <TouchableOpacity>
+                    <Text style={styles.buttonText}>aqui!</Text>
+                </TouchableOpacity>
                 </View>
+                
+                
             </KeyboardAvoidingView>
         );
     }
@@ -48,9 +53,17 @@ const styles = StyleSheet.create({
     },
     cadastroTextContent:{
         flexGrow:1,
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'flex-end',
+        justifyContent:'center',
         marginVertical:16
+    },
+
+    buttonText:{
+        fontSize:16,
+        fontWeight: 'bold',
+        color:'black',
+        textAlign:'center',
     }
     
 });

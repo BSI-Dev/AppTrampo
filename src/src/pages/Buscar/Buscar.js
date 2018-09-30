@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,FlatList, Button,Alert, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View,FlatList,TouchableOpacity, Button,Alert, Image} from 'react-native';
 import {Header, Container} from "native-base";
 import api from './../../services/api';
 
@@ -11,23 +11,67 @@ export default class Buscar extends Component {
   };
   //toda vez que há variação de estado, o método render é executado
   state = {
-
+    anuncioInfo:{}, //para guardar as informações do que é buscado da API ex.: Total de itens, páginas
+    docs:[],
+    page:1,
   };
 
   componentDidMount(){
     this.loadAnuncios();
   }
   //utilizando arrowfunction para poder enxergar o 'this'
-  loadAnuncios = async () => {
+  loadAnuncios = async (page = 1) => {
     const response = await api.get(); //colocar o caminho a partir da baseUrl que é pra buscar os itens
+    //const response = await api.get('/products?page=${page}');
     
+    const {docs , ...anuncioInfo} = response.data;
+
+    this.setState({
+      docs : [...this.state.docs, ...docs],
+      anuncioInfo, 
+      page
+    });
   };
+
+  //para carregar os demais itens no scroll
+  loadMore = () => {
+    const  {page, anuncioInfo} = this.state;
+
+    if(page === anuncioInfo.pages) return;
+
+    const pageNumber = page + 1;
+
+    this.loadAnuncios(pageNumber);
+  };
+
+  renderItem=({item}) =>(
+    <View style={styles.anuncioContainer}>
+      <Text style={styles.anuncioTitle}></Text>
+      <Text style={styles.anuncioDescription}>  </Text>
+
+
+      <TouchableOpacity style={styles.anuncioButton}>
+      
+        <Text style={styles.anuncioButtonText}>Acessar </Text>
+      </TouchableOpacity>
+      
+    </View>
+  );
+
 
   render() {
     return (
-      <Container>
-        <FlatList></FlatList>
-      </Container>
+
+      <View style={styles.container}>
+        <FlatList
+          contentContainerStyle={styles.list}
+          //colocar os itens abaixo quando tiver trazendo dados da API
+          //data={this.state.algumacoisa}
+          //keyExtractor={item=>item._id}
+          renderItem={this.renderItem}
+          onEndReachedThreshold={0.1} //Qual é o percentual que quero chegar do fim da lista para começar a carregar os novos itens
+        />
+      </View>
     );
   }
 }
@@ -35,38 +79,51 @@ export default class Buscar extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FAFAFA',
   },
 
-  containerImage:{
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  list:{
+    padding:20,
   },
-  
-  textHeader:{
-    top: 10,
-    textAlign: 'center',
-    color: 'white',
-    marginBottom: 5,
-    fontSize: 30,
+
+
+  anuncioContainer:{
+    backgroundColor:"#FFF",
+    borderWidth: 1,
+    borderColor: "#DDD",
+    borderRadius:5 ,
+    padding:20,
+    marginBottom:20,
   },
-  header:{
-    backgroundColor: 'green',
+
+  anuncioTitle:{
+    fontSize:18,
+    fontWeight:"bold",
+    color:"#999",
   },
-  perfis:{
-    top: 10,
-    alignItems: 'center',
-    flexDirection: 'row',
-    padding:10,
-    justifyContent: 'space-between',
+
+  anuncioDescription:{
+    fontSize:16,
+    color:"#999",
+    marginTop:5,
+    lineHeight:24,
   },
-  logo:{
-    top:10,
-    width: 300,
-    height:300,
+
+  anuncioButton:{
+    height:42,
+    borderRadius:5,
+    borderWidth:2,
+    borderColor:"#DA552F",
+    backgroundColor:"transparent",
+    justifyContent:"center",
+    alignItems:"center",
+    marginTop:10,
+  },
+
+  anuncioButtonText:{
+    fontSize:16,
+    color:"#DAFF5F",
+    fontWeight:"bold",
   },
   
 });
