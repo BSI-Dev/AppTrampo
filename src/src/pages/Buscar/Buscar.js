@@ -1,129 +1,106 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,FlatList,TouchableOpacity, Button,Alert, Image} from 'react-native';
-import {Header, Container} from "native-base";
-import api from './../../services/api';
+import {View, TouchableOpacity,Text,StyleSheet,Slider,FlatList} from 'react-native';
+import {SearchBar} from 'react-native-elements';
+import { Container } from 'native-base';
 
+export default class Buscar extends Component{
+    static navigationOptions ={
+        title:"Trampo"
+    };
 
-export default class Buscar extends Component {
+    state={
+        distancia: 1,
+        avaliacao: 1
+    };
 
-  static navigationOptions ={
-    title:"Trampo"
-  };
-  //toda vez que há variação de estado, o método render é executado
-  state = {
-    anuncioInfo:{}, //para guardar as informações do que é buscado da API ex.: Total de itens, páginas
-    docs:[],
-    page:1,
-  };
+    renderBuscaAvancada(){
+        return(
+        <View>
+            <FlatList
+                
+            />
+        </View>
+        )
+    };
 
-  componentDidMount(){
-    this.loadAnuncios();
-  }
-  //utilizando arrowfunction para poder enxergar o 'this'
-  loadAnuncios = async (page = 1) => {
-    const response = await api.get(); //colocar o caminho a partir da baseUrl que é pra buscar os itens
-    //const response = await api.get('/products?page=${page}');
-    
-    const {docs , ...anuncioInfo} = response.data;
+    render(){
+        return(
+            <Container>
+            
+                <SearchBar placeholder='Buscar ...' />
+                
+                    <TouchableOpacity style={styles.buscaAvancada} onPress={this.renderBuscaAvancada}>
+                        <Text style={styles.buttonTextAvancada}>Busca Avançada</Text>
+                    </TouchableOpacity>
+                    
+                    <Slider
+                        minimumValue={1}
+                        maximumValue={50}
+                        value={this.state.distancia}
+                        onValueChange={value => this.setState({distancia:value})}
+                    />
+                    <View style={styles.viewTextSlider}> 
+                    <Text style={styles.textSlider}>Distância</Text>
+                    <Text style={styles.textSlider}>{this.state.distancia} km</Text>
+                    </View>
 
-    this.setState({
-      docs : [...this.state.docs, ...docs],
-      anuncioInfo, 
-      page
-    });
-  };
+                    <Slider
+                        minimumValue={1}
+                        maximumValue={5}
+                        value={this.state.avaliacao}
+                        onValueChange={value => this.setState({avaliacao:value})}
+                    />
+                    <View style={styles.viewTextSlider}> 
+                    <Text style={styles.textSlider}>Avaliação</Text>
+                    <Text style={styles.textSlider}>{this.state.avaliacao} pontos</Text>
+                    </View>
 
-  //para carregar os demais itens no scroll
-  loadMore = () => {
-    const  {page, anuncioInfo} = this.state;
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <Text style={styles.buttonText}>Filtrar</Text>
+                    </TouchableOpacity>
 
-    if(page === anuncioInfo.pages) return;
+                    
+            
+            </Container>
 
-    const pageNumber = page + 1;
+        );
+    }
 
-    this.loadAnuncios(pageNumber);
-  };
-
-  renderItem=({item}) =>(
-    <View style={styles.anuncioContainer}>
-      <Text style={styles.anuncioTitle}></Text>
-      <Text style={styles.anuncioDescription}>  </Text>
-
-
-      <TouchableOpacity style={styles.anuncioButton}>
-      
-        <Text style={styles.anuncioButtonText}>Acessar </Text>
-      </TouchableOpacity>
-      
-    </View>
-  );
-
-
-  render() {
-    return (
-
-      <View style={styles.container}>
-        <FlatList
-          contentContainerStyle={styles.list}
-          //colocar os itens abaixo quando tiver trazendo dados da API
-          //data={this.state.algumacoisa}
-          //keyExtractor={item=>item._id}
-          renderItem={this.renderItem}
-          onEndReachedThreshold={0.1} //Qual é o percentual que quero chegar do fim da lista para começar a carregar os novos itens
-        />
-      </View>
-    );
-  }
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FAFAFA',
-  },
 
-  list:{
-    padding:20,
-  },
+    buttonTextAvancada:{
+        fontSize:16,
+        fontWeight: 'bold',
+        color:'black',
+        textAlign:'center',
+        padding:5,
+    },
+    buscaAvancada:{
+        alignItems: 'flex-start'
+    },
+    textSlider:{
+        fontSize:16,
+        color:"#0D0A0A",
+        paddingLeft:25,
+        padding:5
+    },
+    viewTextSlider:{
+        flexDirection: "row",
+        justifyContent:"space-between" 
+    },
+    buttonContainer:{
+        backgroundColor: '#95a5a6',
+        paddingVertical: 10,
+        borderRadius: 10,
+        
+    },
+    buttonText:{
+        textAlign: 'center',
+        color: '#FFFFFF',
+        fontWeight:'700',
+        fontSize:20
+    }
 
-
-  anuncioContainer:{
-    backgroundColor:"#FFF",
-    borderWidth: 1,
-    borderColor: "#DDD",
-    borderRadius:5 ,
-    padding:20,
-    marginBottom:20,
-  },
-
-  anuncioTitle:{
-    fontSize:18,
-    fontWeight:"bold",
-    color:"#999",
-  },
-
-  anuncioDescription:{
-    fontSize:16,
-    color:"#999",
-    marginTop:5,
-    lineHeight:24,
-  },
-
-  anuncioButton:{
-    height:42,
-    borderRadius:5,
-    borderWidth:2,
-    borderColor:"#DA552F",
-    backgroundColor:"transparent",
-    justifyContent:"center",
-    alignItems:"center",
-    marginTop:10,
-  },
-
-  anuncioButtonText:{
-    fontSize:16,
-    color:"#DAFF5F",
-    fontWeight:"bold",
-  },
-  
 });

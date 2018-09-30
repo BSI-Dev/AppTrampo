@@ -2,27 +2,26 @@ import React, {Component} from 'react';
 import {StyleSheet, View, KeyboardAvoidingView, Text, Image, TouchableOpacity} from 'react-native';
 import LoginForm from './LoginForm';
 
-export default class Login extends Component{
-    render(){
-        return(
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                <View style={styles.logoContainer}>
-                    <Image style={styles.logo} source={require('./../../assets/trampo.png')}/>
-                </View>
-                          
-                <LoginForm />
-                <View style={styles.cadastroTextContent}>
-                    <Text style={styles.cadastroText}>Não tem cadastro? Faça seu cadastro </Text>
-                    <TouchableOpacity>
-                    <Text style={styles.buttonText}>aqui!</Text>
-                </TouchableOpacity>
-                </View>
-                
-                
-            </KeyboardAvoidingView>
-        );
-    }
-}
+const Login =({navigation}) => (
+   
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <View style={styles.logoContainer}>
+            <Image style={styles.logo} source={require('./../../assets/trampo.png')}/>
+        </View>
+                    
+        <LoginForm />
+        <View style={styles.cadastroTextContent}>
+            <Text style={styles.cadastroText}>Não tem cadastro? Faça seu cadastro </Text>
+            <TouchableOpacity onPress={() => {navigation.navigate('Cadastro');}}>
+                <Text style={styles.buttonText}>aqui!</Text>
+            </TouchableOpacity>
+        </View>
+        
+        
+    </KeyboardAvoidingView>
+);
+
+export default Login;
 
 Login.navigationOptions = {
     title: 'Trampo',
