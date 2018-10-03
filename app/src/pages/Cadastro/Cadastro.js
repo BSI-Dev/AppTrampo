@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar} from 'react-native';
-import {Container} from "native-base";
+import {StyleSheet, View, TextInput, TouchableOpacity, Text, ScrollView, StatusBar} from 'react-native';
+import {Container, Radio} from "native-base";
 import DatePicker from 'react-native-datepicker';
+import  RadioForm from 'react-native-simple-radio-button';
+import { CheckBox } from 'react-native-elements';
+
+var radio_props = [
+    {label: 'Cliente', value: 0 },
+    {label: 'Prestador', value: 1 }
+  ];
+
 
 const Cadastro =({navigation}) => (
     
-
+    
     <Container>
+        <ScrollView>
         <View style={styles.inputContainer}>
             <TextInput
                 placeholder="Nome"
@@ -56,7 +65,49 @@ const Cadastro =({navigation}) => (
             />  
         </View>
         <View style={styles.inputContainer}>
+            <TextInput
+                    placeholder="CPF"
+                    placeholderTextColor="rgba(0,0,0,1)"
+                    returnKeyLabel = "next"
+                    onSubmitEditing={()=>this.passwordInput.focus()}
+                    autoCapitalize="words"
+                    autoCorrect={false}
+                    style={styles.input}
+                />  
         </View>
+        <View  style={styles.inputContainer}>
+            <RadioForm
+                radio_props={radio_props}
+                initial={0}
+                onPress={(value) => {this.setState({value:value})}}
+                circleSize = {5}
+                outerColor = {"#0d9312"}
+            />
+        </View>
+        <View  style={styles.inputContainer}>
+                <Text style={styles.textCategoria}>Categoria</Text>
+            <CheckBox
+                title='eletricista'
+                
+                // checked={this.state.checked}
+            />
+            <CheckBox
+                title='pedreiro'
+               
+                // checked={this.state.checked}
+            />
+            <CheckBox
+                title='Click Here'
+                
+                // checked={this.state.checked}
+            />
+        </View>
+
+        <TouchableOpacity style={styles.buttonContainer}>
+                    <Text style={styles.buttonText}>CADASTRAR</Text>
+        </TouchableOpacity>
+
+        </ScrollView>
     </Container>
 );
 
@@ -86,13 +137,16 @@ const styles = StyleSheet.create({
         fontSize:16,
     },
     buttonContainer:{
-        backgroundColor: '#95a5a6',
+        backgroundColor: '#0d9312',
         paddingVertical: 15
     },
     buttonText:{
         textAlign: 'center',
         color: '#FFFFFF',
         fontWeight:'700'
+    },
+    textCategoria:{
+        color:'#000'
     }
 
 
