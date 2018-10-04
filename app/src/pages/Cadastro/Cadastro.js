@@ -10,63 +10,61 @@ var radio_props = [
     {label: 'Prestador', value: 1 }
   ];
 
+this.state ={
+    date:''
+}
 
-const Cadastro =({navigation}) => (
-    
-    
-    <Container>
-        <ScrollView>
-        <View style={styles.inputContainer}>
-            <TextInput
-                placeholder="Nome"
-                placeholderTextColor="rgba(0,0,0,1)"
-                returnKeyLabel = "next"
-                onSubmitEditing={()=>this.passwordInput.focus()}
-                autoCapitalize="words"
-                autoCorrect={false}
-                style={styles.input}
-            />
-        </View>
-        <View style={styles.inputContainer}>
-            <DatePicker
-                style={{width: 200}}
-                //date={this.state.date}
-                mode="date"
-                placeholder="Data de Nascimento"
-                format="YYYY-MM-DD"
-                minDate="2016-05-01"
-                maxDate="2016-06-01"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                  dateIcon: {
-                    position: 'absolute',
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0
-                  },
-                  dateInput: {
-                    marginLeft: 36
-                  }
-                }}
-                //onDateChange={(date) => {this.setState({date: date})}}
-            />
-            
-        </View>
-        <View style={styles.inputContainer}>
-            <TextInput
-                placeholder="Endereço"
-                placeholderTextColor="rgba(0,0,0,1)"
-                returnKeyLabel = "next"
-                onSubmitEditing={()=>this.passwordInput.focus()}
-                autoCapitalize="words"
-                autoCorrect={false}
-                style={styles.input}
-            />  
-        </View>
-        <View style={styles.inputContainer}>
-            <TextInput
-                    placeholder="CPF"
+export default class Cadastro extends Component{
+    static navigationOptions ={
+        title:"Trampo"
+    };
+
+    validate(){
+        
+    }
+
+    render(){
+        return(
+            <Container>
+            <ScrollView>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    placeholder="Nome"
+                    placeholderTextColor="rgba(0,0,0,1)"
+                    returnKeyLabel = "next"
+                    onSubmitEditing={()=>this.passwordInput.focus()}
+                    autoCapitalize="words"
+                    autoCorrect={false}
+                    style={styles.input}
+                />
+            </View>
+            <View style={styles.inputContainer}>
+                <DatePicker
+                    style={styles.datePicker}
+                    
+                    mode="date"
+                    placeholder="Data de Nascimento"
+                    format="DD-MM-YYYY"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                    dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0
+                    },
+                    dateInput: {
+                        marginLeft: 36
+                    }
+                    }}
+                    onDateChange={(date) => {this.setState({date: date})}}
+                />
+                
+            </View>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    placeholder="Endereço"
                     placeholderTextColor="rgba(0,0,0,1)"
                     returnKeyLabel = "next"
                     onSubmitEditing={()=>this.passwordInput.focus()}
@@ -74,48 +72,62 @@ const Cadastro =({navigation}) => (
                     autoCorrect={false}
                     style={styles.input}
                 />  
-        </View>
-        <View  style={styles.inputContainer}>
-            <RadioForm
-                radio_props={radio_props}
-                initial={0}
-                onPress={(value) => {this.setState({value:value})}}
-                circleSize = {5}
-                outerColor = {"#0d9312"}
-            />
-        </View>
-        <View  style={styles.inputContainer}>
-                <Text style={styles.textCategoria}>Categoria</Text>
-            <CheckBox
-                title='eletricista'
-                
-                // checked={this.state.checked}
-            />
-            <CheckBox
-                title='pedreiro'
-               
-                // checked={this.state.checked}
-            />
-            <CheckBox
-                title='Click Here'
-                
-                // checked={this.state.checked}
-            />
-        </View>
+            </View>
+            <View style={styles.inputContainer}>
+                <TextInput
+                        placeholder="CPF"
+                        placeholderTextColor="rgba(0,0,0,1)"
+                        returnKeyLabel = "next"
+                        onSubmitEditing={()=>this.passwordInput.focus()}
+                        autoCapitalize="words"
+                        autoCorrect={false}
+                        style={styles.input}
+                    />  
+            </View>
+            <View  style={styles.inputContainer}>
+                <RadioForm
+                    radio_props={radio_props}
+                    initial={0}
+                    onPress={(value) => {this.setState({value:value})}}
+                    circleSize = {5}
+                    outerColor = {"#689F38"}
+                />
+            </View>
+            <View  style={styles.inputContainer}>
+                    <Text style={styles.textCategoria}>Categoria</Text>
+                <CheckBox
+                    title='eletricista'
+                    
+                    // checked={this.state.checked}
+                />
+                <CheckBox
+                    title='pedreiro'
+                    
+                    // checked={this.state.checked}
+                />
+                <CheckBox
+                    title='Click Here'
+                    
+                    // checked={this.state.checked}
+                />
+            </View>
 
-        <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>CADASTRAR</Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+                        <Text style={styles.buttonText}>CADASTRAR</Text>
+            </TouchableOpacity>
 
-        </ScrollView>
-    </Container>
-);
+            </ScrollView>
+        </Container>
+        );
+    }
+}
+    
+    
+    
 
-Cadastro.navigationOptions = {
-    title: 'Trampo',
-  }
+
   
-export default Cadastro;
+
 
 
 const styles = StyleSheet.create({
@@ -123,16 +135,21 @@ const styles = StyleSheet.create({
         padding: 20
     },
     inputContainer:{
-        padding:10
+        // padding:5
+    },
+    datePicker:{
+        margin: 10,
+        width:300,
+        
     },
 
     input:{
         height: 40,
-        backgroundColor: '#95a5a6',
-        marginBottom: 10,
+        backgroundColor: '#689F38',
+        margin: 15,
         color: '#000000',
         paddingHorizontal: 10,
-        borderRadius:25,
+        borderRadius:5,
         color: '#FFFFFF',
         fontSize:16,
     },
@@ -147,6 +164,9 @@ const styles = StyleSheet.create({
     },
     textCategoria:{
         color:'#000'
+    },
+    perfil:{
+        color:'#689F38',
     }
 
 

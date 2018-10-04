@@ -42,12 +42,14 @@ const styles = StyleSheet.create({
         padding: 20
     },
     input:{
-        height: 40,
         backgroundColor: 'rgba(255,255,255,0.7)',
-        marginBottom: 10,
+        margin: 15,
         color: '#000000',
         paddingHorizontal: 10,
-        borderColor: 'rgba(0,0,0,0.7)',
+        borderColor: 'rgba(0,0,0,1)',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingVertical:10
     },
     buttonContainer:{
         backgroundColor: '#95a5a6',
