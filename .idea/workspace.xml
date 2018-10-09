@@ -3,11 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c4f4344c-1b76-4369-ab49-d9ab97dafeda" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/package-lock.json" afterPath="$PROJECT_DIR$/src/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/src/package.json" afterPath="$PROJECT_DIR$/src/package.json" />
-      <change beforePath="$PROJECT_DIR$/src/src/pages/Buscar/Buscar.js" afterPath="$PROJECT_DIR$/src/src/pages/Buscar/Buscar.js" />
-      <change beforePath="$PROJECT_DIR$/src/src/pages/Buscar/Visitar.js" afterPath="$PROJECT_DIR$/src/src/pages/Buscar/Visitar.js" />
-      <change beforePath="$PROJECT_DIR$/src/src/routes.js" afterPath="$PROJECT_DIR$/src/src/routes.js" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" afterPath="$PROJECT_DIR$/app/package-lock.json" />
+      <change beforePath="$PROJECT_DIR$/app/src/pages/Buscar/Buscar.js" afterPath="$PROJECT_DIR$/app/src/pages/Buscar/Buscar.js" />
+      <change beforePath="$PROJECT_DIR$/app/src/pages/Buscar/Listar.js" afterPath="$PROJECT_DIR$/app/src/pages/Buscar/Listar.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,9 +45,9 @@
     <panes>
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

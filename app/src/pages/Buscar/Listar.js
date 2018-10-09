@@ -47,7 +47,7 @@ export default class Listar extends Component {
   renderItem=({item}) =>(
     <View style={styles.anuncioContainer}>
       <Text style={styles.anuncioTitle}></Text>
-      <Text style={styles.anuncioDescription}>  </Text>
+      <Text style={styles.anuncioDescription}> teste </Text>
 
 
       <TouchableOpacity style={styles.anuncioButton}>

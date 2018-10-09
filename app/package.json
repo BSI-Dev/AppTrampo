@@ -18,11 +18,16 @@
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
-    "jest": "23.6.0",
+    "codeceptjs": "^1.4.2",
+    "jest": "^23.6.0",
     "metro-react-native-babel-preset": "0.45.5",
+    "puppeteer": "^1.9.0",
     "react-test-renderer": "16.5.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "C:/Users/jonat/Documents/workspace/appTrampo/AppTrampo/app/node_modules/react-native/jest/preprocessor.js"
+    }
   }
 }

@@ -55,7 +55,7 @@ export default class Buscar extends Component{
                     <Text style={styles.textSlider}>{this.state.avaliacao} pontos</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('Listar');}}>
                         <Text style={styles.buttonText}>Filtrar</Text>
                     </TouchableOpacity>
 
