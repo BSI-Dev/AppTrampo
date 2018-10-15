@@ -1,7 +1,7 @@
 package com.apptrampo;
 
 import com.facebook.react.ReactActivity;
-
+//teste comunicacao git X c9
 public class MainActivity extends ReactActivity {
 
     /**
