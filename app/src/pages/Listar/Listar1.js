@@ -4,7 +4,7 @@ import {Header, Container} from "native-base";
 import api from '../../services/api';
 
 
-export default class Listar extends Component {
+export default class Listar1 extends Component {
 
   static navigationOptions ={
     title:"Trampo"
@@ -21,7 +21,7 @@ export default class Listar extends Component {
   }
   //utilizando arrowfunction para poder enxergar o 'this'
   loadAnuncios = async (page = 1) => {
-    const response = await api.get(); //colocar o caminho a partir da baseUrl que é pra buscar os itens
+    const response = await api.get('/Pessoa?page=${page}'); //colocar o caminho a partir da baseUrl que é pra buscar os itens
     //const response = await api.get('/products?page=${page}');
     
     const {docs , ...anuncioInfo} = response.data;
@@ -79,7 +79,7 @@ export default class Listar extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFFFF',
   },
 
   list:{
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
 
   anuncioContainer:{
-    backgroundColor:"#FFF",
+    backgroundColor:"#b2bec3",
     borderWidth: 1,
     borderColor: "#DDD",
     borderRadius:5 ,

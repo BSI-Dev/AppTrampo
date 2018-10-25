@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar} from 'react-native';
 
+import api from '../../services/api';
+
+import LoginController from '../../controllers';
+
+
 export default class LoginForm extends Component {
+
+
+    
+
     render(){
         return(
             <View style={StyleSheet.container}>
@@ -28,7 +37,7 @@ export default class LoginForm extends Component {
                 />
 
 
-                <TouchableOpacity style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={LoginController.handleSignInPress}>
                     <Text style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity>
 

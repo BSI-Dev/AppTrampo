@@ -18,7 +18,7 @@ const Content = styled.View`
 `;
 
 const Listar = () => (
-  <ScrollView style={{ backgroundColor: "#FAA"}}>
+  <ScrollView style={{ backgroundColor: "#b2bec3"}}>
     <Content>
       {usuarios.map((value, index) => <ListaComponente usuario={value} key={index} />)}
     </Content>
