@@ -1,0 +1,35 @@
+{
+  "name": "AppTrampo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "native-base": "^2.8.0",
+    "prop-types": "^15.6.2",
+    "react": "16.5.0",
+    "react-native": "0.57.0",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-elements": "^0.19.1",
+    "react-native-simple-radio-button": "^2.7.3",
+    "react-navigation": "^2.18.1",
+    "styled-components": "^3.4.10"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "codeceptjs": "^1.4.2",
+    "jest": "^23.6.0",
+    "metro-react-native-babel-preset": "0.45.5",
+    "puppeteer": "^1.9.0",
+    "react-test-renderer": "16.5.0"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "C:/Users/jonat/Documents/workspace/appTrampo/AppTrampo/app/node_modules/react-native/jest/preprocessor.js"
+    }
+  }
+}
