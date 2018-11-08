@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { ScrollView } from 'react-native';
 import ListaComponente from './ListaComponente';
 import styled from 'styled-components';
@@ -31,7 +31,37 @@ const Content = styled.View`
   margin: 10px 0px;
 `;
 
+/*
+static navigationOptions ={
+  title:"Trampo",
+  header: null
+};
+*/
+
+
+export default class Listar extends Component{
+  
+  static navigationOptions ={
+    header: null
+  };
+
+   render(){
+      return(
+        <ScrollView style={{ backgroundColor: "gray"}}>
+          <Content>
+            {usuarios.map((value, index) => <ListaComponente usuario={value} key={index} />)}
+          </Content>
+        </ScrollView>
+      );
+  }
+}
+  
+  
+  
+
+/*
 const Listar = () => (
+  
   <ScrollView style={{ backgroundColor: "gray"}}>
     <Content>
       {usuarios.map((value, index) => <ListaComponente usuario={value} key={index} />)}
@@ -39,4 +69,4 @@ const Listar = () => (
   </ScrollView>
 );
 
-export default Listar;
+export default Listar;*/

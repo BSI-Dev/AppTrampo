@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
+import {CheckBox, SearchBar} from 'react-native-elements';
 import {View, TouchableOpacity,Text,StyleSheet,Slider,FlatList} from 'react-native';
-import {SearchBar} from 'react-native-elements';
-import { Container } from 'native-base';
+import { Container, Left } from 'native-base';
+import  RadioForm from 'react-native-simple-radio-button';
+
+var radio_props = [
+    {label: 'Serviço', value: 0 },
+    {label: 'Demanda', value: 1 }
+  ];
+
 
 export default class Buscar extends Component{
     static navigationOptions ={
@@ -16,8 +23,7 @@ export default class Buscar extends Component{
     renderBuscaAvancada(){
         return(
         <View>
-            <FlatList
-                
+            <FlatList            
             />
         </View>
         )
@@ -55,11 +61,33 @@ export default class Buscar extends Component{
                     <Text style={styles.textSlider}>{this.state.avaliacao} pontos</Text>
                     </View>
 
+                    <View> 
+                        <Text style={styles.viewTextFiltro}>Filtrar Por</Text>
+
+                        <View  style={styles.viewFiltro}>
+                        <RadioForm
+                            radio_props={radio_props}
+                            initial={0}
+                            onPress={(value) => {this.setState({value:value})}}
+                            circleSize = {5}
+                            buttonColor={'#009624'}
+                            selectedButtonColor = {"#009624"}
+                            buttonInnerColor={'#009624'}
+                            buttonSize={10}
+                            buttonOuterSize={20}
+                        />
+
+                        </View>    
+                        
+
+                    </View>
+
+                     
+
+
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('Listar');}}>
                         <Text style={styles.buttonText}>Filtrar</Text>
-                    </TouchableOpacity>
-
-                    
+                    </TouchableOpacity>                  
             
             </Container>
 
@@ -90,11 +118,29 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent:"space-between" 
     },
+
+    viewTextFiltro:{
+        padding:10
+    },
+
+    viewFiltro:{
+        flexDirection: "row",
+        padding:10
+        //justifyContent:"space-between" 
+    },
+
     buttonContainer:{
         backgroundColor: '#95a5a6',
         paddingVertical: 10,
         borderRadius: 10,
         
+    },
+    buttonContainerFiltrar:{
+        backgroundColor: '#95a5a6',
+        paddingVertical: 10,
+        borderRadius: 10,
+        width: '40%',
+        padding: 10,
     },
     buttonText:{
         textAlign: 'center',

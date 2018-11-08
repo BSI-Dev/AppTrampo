@@ -12,6 +12,7 @@ import { DrawerNavigator, StackNavigator, TabNavigator, createStackNavigator } f
 //import ItemList from './ItemList'
 //import Item from './Item'
 
+import Buscar from './pages/Buscar/Buscar'
 import TabDemanda from './pages/Listar/TabDemanda'
 import TabPrestador from './pages/Listar/TabPrestador'
 import Listar from './pages/Listar/Listar'
@@ -65,12 +66,18 @@ const Tabs = TabNavigator({
 
 const Drawer = DrawerNavigator({
   //Stack: { screen: Stack },
-  Tabs: { 
+  Buscar:{
+    screen: Buscar
+  },
+  Listar:{
+    screen: StackLista
+  },
+  /*Tabs: { 
     screen: Tabs,
     navigationOptions: {
       title: 'Demandas/Prestador'
     }
-  },
+  },*/
   Perfil: { 
     screen: StackPerfil,
     navigationOptions: {
@@ -84,7 +91,7 @@ const Drawer = DrawerNavigator({
     }
   }, 
 },{
-  initialRouteName: 'Tabs',
+  initialRouteName: 'Buscar',
   drawerWidth: 300,
 })
 
