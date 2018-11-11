@@ -85,7 +85,7 @@ export default class Buscar extends Component{
                      
 
 
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('Listar');}}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('Listar1');}}>
                         <Text style={styles.buttonText}>Filtrar</Text>
                     </TouchableOpacity>                  
             

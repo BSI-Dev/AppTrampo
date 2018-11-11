@@ -16,12 +16,14 @@ import Buscar from './pages/Buscar/Buscar'
 import TabDemanda from './pages/Listar/TabDemanda'
 import TabPrestador from './pages/Listar/TabPrestador'
 import Listar from './pages/Listar/Listar'
+import Listar1 from './pages/Listar/Listar1'
 import Login from './pages/Login/Login'
 import Cadastro from './pages/Cadastro/Cadastro'
 
 
 import Perfil from './pages/Cadastro/Perfil'
 import Demanda from './pages/Cadastro/Demanda'
+import Cartao from './pages/Cartao/Cartao'
 
 
 const StackPerfil = StackNavigator({
@@ -32,6 +34,7 @@ const StackPerfil = StackNavigator({
 
 const StackLista = StackNavigator({
     Listar: { screen: Listar },
+    Listar1: {screen: Listar1},
     //Item: { screen: Item },
 })
 
@@ -89,7 +92,14 @@ const Drawer = DrawerNavigator({
     navigationOptions: {
       title: 'Demanda'
     }
-  }, 
+  },
+  Cartao: {
+    screen: Cartao,
+    navigationOptions: {
+      title:'Pacote'
+    }
+  }
+
 },{
   initialRouteName: 'Buscar',
   drawerWidth: 300,

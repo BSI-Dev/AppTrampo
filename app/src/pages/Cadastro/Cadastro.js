@@ -5,13 +5,14 @@ import DatePicker from 'react-native-datepicker';
 import  RadioForm from 'react-native-simple-radio-button';
 import { CheckBox } from 'react-native-elements';
 
+
 var radio_props = [
     {label: 'Cliente', value: 0 },
     {label: 'Prestador', value: 1 }
   ];
 
 this.state ={
-    date:''
+    date:"01-01-2001"
 }
 
 export default class Cadastro extends Component{
@@ -85,13 +86,17 @@ export default class Cadastro extends Component{
                         style={styles.input}
                     />  
             </View>
-            <View  style={styles.inputContainer}>
+            <View  style={styles.inputContainerRadio}>
                 <RadioForm
                     radio_props={radio_props}
                     initial={0}
                     onPress={(value) => {this.setState({value:value})}}
                     circleSize = {5}
-                    outerColor = {"#689F38"}
+                    buttonColor={'#009624'}
+                    selectedButtonColor = {"#009624"}
+                    buttonInnerColor={'#009624'}
+                    buttonSize={10}
+                    buttonOuterSize={20}
                 />
             </View>
             <View  style={styles.inputContainer}>
@@ -136,7 +141,11 @@ const styles = StyleSheet.create({
         padding: 20
     },
     inputContainer:{
-        // padding:5
+        padding:5
+    },
+    inputContainerRadio:{
+        padding:10,
+        marginLeft: 20
     },
     datePicker:{
         margin: 10,
