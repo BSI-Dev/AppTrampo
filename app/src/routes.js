@@ -73,7 +73,7 @@ const Drawer = DrawerNavigator({
     screen: Buscar
   },
   Listar:{
-    screen: StackLista
+    screen: StackLista,
   },
   /*Tabs: { 
     screen: Tabs,

@@ -47,7 +47,7 @@ export default class Buscar extends Component{
                     />
                     <View style={styles.viewTextSlider}> 
                     <Text style={styles.textSlider}>Distância</Text>
-                    <Text style={styles.textSlider}>{this.state.distancia} km</Text>
+                    <Text style={styles.textSlider}>{this.state.distancia.toFixed(1)} km</Text>
                     </View>
 
                     <Slider
@@ -58,7 +58,7 @@ export default class Buscar extends Component{
                     />
                     <View style={styles.viewTextSlider}> 
                     <Text style={styles.textSlider}>Avaliação</Text>
-                    <Text style={styles.textSlider}>{this.state.avaliacao} pontos</Text>
+                    <Text style={styles.textSlider}>{this.state.avaliacao.toFixed(2)} pontos</Text>
                     </View>
 
                     <View> 
