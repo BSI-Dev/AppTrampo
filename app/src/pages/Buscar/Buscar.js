@@ -20,14 +20,7 @@ export default class Buscar extends Component{
         avaliacao: 1
     };
 
-    renderBuscaAvancada(){
-        return(
-        <View>
-            <FlatList            
-            />
-        </View>
-        )
-    };
+    
 
     render(){
         return(
@@ -35,30 +28,29 @@ export default class Buscar extends Component{
             
                 <SearchBar placeholder='Buscar ...' />
                 
-                    <TouchableOpacity style={styles.buscaAvancada} onPress={this.renderBuscaAvancada}>
-                        <Text style={styles.buttonTextAvancada}>Busca Avançada</Text>
-                    </TouchableOpacity>
+                    <View style={styles.boxSlides}>
                     
-                    <Slider
-                        minimumValue={1}
-                        maximumValue={50}
-                        value={this.state.distancia}
-                        onValueChange={value => this.setState({distancia:value})}
-                    />
-                    <View style={styles.viewTextSlider}> 
-                    <Text style={styles.textSlider}>Distância</Text>
-                    <Text style={styles.textSlider}>{this.state.distancia.toFixed(1)} km</Text>
-                    </View>
+                        <Slider
+                            minimumValue={1}
+                            maximumValue={50}
+                            value={this.state.distancia}
+                            onValueChange={value => this.setState({distancia:value})}
+                        />
+                        <View style={styles.viewTextSlider}> 
+                            <Text style={styles.textSlider}>Distância</Text>
+                            <Text style={styles.textSlider}>{this.state.distancia.toFixed(1)} km</Text>
+                        </View>
 
-                    <Slider
-                        minimumValue={1}
-                        maximumValue={5}
-                        value={this.state.avaliacao}
-                        onValueChange={value => this.setState({avaliacao:value})}
-                    />
-                    <View style={styles.viewTextSlider}> 
-                    <Text style={styles.textSlider}>Avaliação</Text>
-                    <Text style={styles.textSlider}>{this.state.avaliacao.toFixed(2)} pontos</Text>
+                        <Slider
+                            minimumValue={1}
+                            maximumValue={5}
+                            value={this.state.avaliacao}
+                            onValueChange={value => this.setState({avaliacao:value})}
+                        />
+                        <View style={styles.viewTextSlider}> 
+                            <Text style={styles.textSlider}>Avaliação</Text>
+                            <Text style={styles.textSlider}>{this.state.avaliacao.toFixed(2)} pontos</Text>
+                        </View>
                     </View>
 
                     <View> 
@@ -85,7 +77,7 @@ export default class Buscar extends Component{
                      
 
 
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('Listar1');}}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('AnuncioDemanda');}}>
                         <Text style={styles.buttonText}>Filtrar</Text>
                     </TouchableOpacity>                  
             
@@ -147,6 +139,10 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontWeight:'700',
         fontSize:20
-    }
+    },
+    boxSlides:{
+        
+        padding:10
+    },
 
 });

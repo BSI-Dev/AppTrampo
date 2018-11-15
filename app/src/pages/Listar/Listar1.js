@@ -6,9 +6,7 @@ import api from '../../services/api';
 
 export default class Listar extends Component {
 
-  static navigationOptions ={
-    title:"Trampo"
-  };
+  
   //toda vez que há variação de estado, o método render é executado
   state = {
     anuncioInfo:{}, //para guardar as informações do que é buscado da API ex.: Total de itens, páginas

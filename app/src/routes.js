@@ -24,7 +24,7 @@ import Cadastro from './pages/Cadastro/Cadastro'
 import Perfil from './pages/Cadastro/Perfil'
 import Demanda from './pages/Cadastro/Demanda'
 import Cartao from './pages/Cartao/Cartao'
-
+import AnuncioDemanda from './pages/Anuncio/AnuncioDemanda'
 
 const StackPerfil = StackNavigator({
     Login: { screen: Login },
@@ -35,6 +35,7 @@ const StackPerfil = StackNavigator({
 const StackLista = StackNavigator({
     Listar: { screen: Listar },
     Listar1: {screen: Listar1},
+    AnuncioDemanda: {screen: AnuncioDemanda},
     //Item: { screen: Item },
 })
 
