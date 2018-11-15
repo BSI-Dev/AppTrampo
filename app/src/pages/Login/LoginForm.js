@@ -8,6 +8,7 @@ export default class LoginForm extends Component {
                 <StatusBar
                     barStyle="light-content"
                 />
+                
                 <TextInput 
                 placeholder="email"
                 placeholderTextColor="rgba(0,0,0,0.7)"
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     container:{
         padding: 20
     },
+   
     input:{
         backgroundColor: 'rgba(255,255,255,0.7)',
         margin: 15,

@@ -1,24 +1,36 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TextInput, TouchableOpacity, Text, ScrollView, StatusBar} from 'react-native';
-import {Container, Radio} from "native-base";
+import {Container, Radio, ListItem,Body } from "native-base";
 import DatePicker from 'react-native-datepicker';
 import  RadioForm from 'react-native-simple-radio-button';
 import { CheckBox } from 'react-native-elements';
+//import { Container, Header, Content, Form, Item, Input, Label } from 'native-base';
+import CadastroController from '../../services/CadastroController';
 
 var radio_props = [
     {label: 'Cliente', value: 0 },
     {label: 'Prestador', value: 1 }
   ];
 
-this.state ={
-    date:''
-}
-
 export default class Cadastro extends Component{
     static navigationOptions ={
         title:"Trampo",
         header: null
     };
+
+    
+    state = {
+        listaCategoria: []
+    }
+
+    carregar = async () => {
+        const listaCategoria = await CadastroController.ListarCategoria();
+        this.setState({ listaCategoria:listaCategoria });
+    }
+
+    componentDidMount() {
+        this.carregar()
+    }
 
     validate(){
         
@@ -29,8 +41,9 @@ export default class Cadastro extends Component{
             <Container>
             <ScrollView>
             <View style={styles.inputContainer}>
+                <Text style={styles.cadastroText}>Nome</Text>
                 <TextInput
-                    placeholder="Nome"
+                    placeholder=""
                     placeholderTextColor="rgba(0,0,0,1)"
                     returnKeyLabel = "next"
                     onSubmitEditing={()=>this.passwordInput.focus()}
@@ -40,43 +53,46 @@ export default class Cadastro extends Component{
                 />
             </View>
             <View style={styles.inputContainer}>
+                <Text style={styles.cadastroText}>E-mail</Text>
+                <TextInput
+                    placeholder=""
+                    placeholderTextColor="rgba(0,0,0,1)"
+                    returnKeyLabel = "next"
+                    onSubmitEditing={()=>this.passwordInput.focus()}
+                    autoCapitalize="words"
+                    autoCorrect={false}
+                    style={styles.input}
+                />
+            </View>
+            <View style={styles.inputContainer}>
+                <Text style={styles.cadastroText}>Data de Nascimento</Text>
                 <DatePicker
                     style={styles.datePicker}
-                    
                     mode="date"
-                    placeholder="Data de Nascimento"
-                    format="DD-MM-YYYY"
+                    placeholder=""
+                    format="DD/MM/YYYY"
                     confirmBtnText="Confirm"
                     cancelBtnText="Cancel"
                     customStyles={{
                     dateIcon: {
-                        position: 'absolute',
-                        left: 0,
-                        top: 4,
-                        marginLeft: 0
+                        //position: 'absolute',
+                        //left: 0,
+                      //  top: 4,
+                     //   marginLeft: 0
                     },
                     dateInput: {
-                        marginLeft: 36
+                        borderWidth: 0, 
+                   //     marginLeft: 36
                     }
                     }}
                     onDateChange={(date) => {this.setState({date: date})}}
                 />
-                
             </View>
+            
             <View style={styles.inputContainer}>
+                <Text style={styles.cadastroText}>CPF</Text>
                 <TextInput
-                    placeholder="Endereço"
-                    placeholderTextColor="rgba(0,0,0,1)"
-                    returnKeyLabel = "next"
-                    onSubmitEditing={()=>this.passwordInput.focus()}
-                    autoCapitalize="words"
-                    autoCorrect={false}
-                    style={styles.input}
-                />  
-            </View>
-            <View style={styles.inputContainer}>
-                <TextInput
-                        placeholder="CPF"
+                        placeholder=""
                         placeholderTextColor="rgba(0,0,0,1)"
                         returnKeyLabel = "next"
                         onSubmitEditing={()=>this.passwordInput.focus()}
@@ -84,33 +100,26 @@ export default class Cadastro extends Component{
                         autoCorrect={false}
                         style={styles.input}
                     />  
-            </View>
+            </View>    
+            
+            
             <View  style={styles.inputContainer}>
-                <RadioForm
-                    radio_props={radio_props}
-                    initial={0}
-                    onPress={(value) => {this.setState({value:value})}}
-                    circleSize = {5}
-                    outerColor = {"#689F38"}
-                />
+                <Text style={styles.cadastroText}>Perfil</Text>
+                <CheckBox title='Cliente' />
+                <CheckBox title='Prestador'/>
             </View>
+ 
             <View  style={styles.inputContainer}>
-                    <Text style={styles.textCategoria}>Categoria</Text>
-                <CheckBox
-                    title='eletricista'
-                    
-                    // checked={this.state.checked}
-                />
-                <CheckBox
-                    title='pedreiro'
-                    
-                    // checked={this.state.checked}
-                />
-                <CheckBox
-                    title='Click Here'
-                    
-                    // checked={this.state.checked}
-                />
+                <Text style={styles.cadastroText}>Categoria</Text>
+                {/*<TouchableOpacity onPress={() => {this.props.navigation.navigate('Servico');}}>
+                    <Text >serviços</Text>
+                </TouchableOpacity>*/}
+                {this.state.listaCategoria.map((value, index) => ( <ListItem key={index}>
+                    <CheckBox checked={false} color="green"/>
+                    <Body>
+                        <Text>{value.Descricao}</Text>
+                    </Body>
+                </ListItem>))}
             </View>
 
             <TouchableOpacity style={styles.buttonContainer}>
@@ -126,31 +135,44 @@ export default class Cadastro extends Component{
     
     
 
-
-  
-
-
-
 const styles = StyleSheet.create({
     container:{
         padding: 20
+    },
+    cadastroText: {
+        marginTop: 10,
+        marginLeft: 15,
+        marginRight: 15,
+        color:'#689F38',
+        fontSize: 16,
     },
     inputContainer:{
         // padding:5
     },
     datePicker:{
-        margin: 10,
-        width:300,
+        marginLeft: 15,
+        marginRight: 15,
+       // color: '#000000',
+        paddingHorizontal: 10,
+        borderRadius:5,
+        borderWidth: 1,
+        borderColor: '#689F38',
+        color: '#FFFFFF',
+        fontSize:16,
+        width:'92%',
         
     },
-
     input:{
+        marginLeft: 15,
+        marginRight: 15,
         height: 40,
-        backgroundColor: '#689F38',
-        margin: 15,
+        //backgroundColor: '#689F38',
+        //margin: 10,
         color: '#000000',
         paddingHorizontal: 10,
         borderRadius:5,
+        borderWidth: 1,
+        borderColor: '#689F38',
         color: '#FFFFFF',
         fontSize:16,
     },
