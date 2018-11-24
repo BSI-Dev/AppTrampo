@@ -89,7 +89,7 @@ class ListaComponent extends Component{
             <Card>
                 <CardHeader>
                     <HeaderText>
-                        {usuario.name}
+                        {usuario.ID} {usuario.Titulo}
                     </HeaderText>
                 </CardHeader>
 
@@ -99,7 +99,7 @@ class ListaComponent extends Component{
 
                         <DescriptionContainer>
                             <Description>
-                                {usuario.description}
+                                {usuario.Descricao}
                             </Description>
                         </DescriptionContainer>
 
@@ -124,8 +124,10 @@ class ListaComponent extends Component{
 
 ListaComponent.propTypes = {
     usuario: PropTypes.shape({
-        avatarUrl : PropTypes.string.isRequired,
+        ID : PropTypes.number.isRequired,
+        Titulo: PropTypes.string.isRequired,
         description: PropTypes.string,
+        Descricao: PropTypes.string,
     }).isRequired,
 };
 

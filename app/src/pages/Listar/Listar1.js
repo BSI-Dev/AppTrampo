@@ -1,46 +1,69 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,FlatList,TouchableOpacity, Button,Alert, Image} from 'react-native';
+import {Platform, StyleSheet, ScrollView, Text, View,FlatList,TouchableOpacity, Button,Alert, Image} from 'react-native';
 import {Header, Container} from "native-base";
+import ListaComponente from './ListaComponente';
 import api from '../../services/api';
+import ListarController from '../../services/ListarController';
 
+import styled from 'styled-components';
+
+
+
+const Content = styled.View`
+  margin: 10px 0px;
+`;
 
 export default class Listar extends Component {
 
-  
+  static navigationOptions ={
+    header: null
+  };
+
   //toda vez que há variação de estado, o método render é executado
   state = {
+    listaDemandas:[],
     anuncioInfo:{}, //para guardar as informações do que é buscado da API ex.: Total de itens, páginas
     docs:[],
     page:1,
   };
 
-  componentDidMount(){
-    this.loadAnuncios();
+
+  carregar = async () => {
+    const listaDemandas = await ListarController.ListarDemandas();
+    this.setState({ listaDemandas:listaDemandas });
   }
-  //utilizando arrowfunction para poder enxergar o 'this'
-  loadAnuncios = async (page = 1) => {
-    const response = await api.get(); //colocar o caminho a partir da baseUrl que é pra buscar os itens
-    //const response = await api.get('/products?page=${page}');
+
+  componentDidMount() {
+      this.carregar()
+  }
+
+  // componentDidMount(){
+  //   this.loadAnuncios();
+  // }
+  // //utilizando arrowfunction para poder enxergar o 'this'
+  // loadAnuncios = async (page = 1) => {
+  //   const response = await api.get('/demandas'); //colocar o caminho a partir da baseUrl que é pra buscar os itens
+  //   //const response = await api.get('/products?page=${page}');
     
-    const {docs , ...anuncioInfo} = response.data;
+  //   const {docs , ...anuncioInfo} = response.data;
 
-    this.setState({
-      docs : [...this.state.docs, ...docs],
-      anuncioInfo, 
-      page
-    });
-  };
+  //   this.setState({
+  //     docs : [...this.state.docs, ...docs],
+  //     anuncioInfo, 
+  //     page
+  //   });
+  // };
 
-  //para carregar os demais itens no scroll
-  loadMore = () => {
-    const  {page, anuncioInfo} = this.state;
+  // //para carregar os demais itens no scroll
+  // loadMore = () => {
+  //   const  {page, anuncioInfo} = this.state;
 
-    if(page === anuncioInfo.pages) return;
+  //   if(page === anuncioInfo.pages) return;
 
-    const pageNumber = page + 1;
+  //   const pageNumber = page + 1;
 
-    this.loadAnuncios(pageNumber);
-  };
+  //   this.loadAnuncios(pageNumber);
+  // };
 
   renderItem=({item}) =>(
     <View style={styles.anuncioContainer}>
@@ -59,17 +82,22 @@ export default class Listar extends Component {
 
   render() {
     return (
+      <ScrollView style={{ backgroundColor: "gray"}}>
+        <Content>
+          {this.state.listaDemandas.map((value, index) => <ListaComponente usuario={value} key={index} />)}
+        </Content>
+      </ScrollView>
 
-      <View style={styles.container}>
-        <FlatList
-          contentContainerStyle={styles.list}
-          //colocar os itens abaixo quando tiver trazendo dados da API
-          //data={this.state.algumacoisa}
-          //keyExtractor={item=>item._id}
-          renderItem={this.renderItem}
-          onEndReachedThreshold={0.1} //Qual é o percentual que quero chegar do fim da lista para começar a carregar os novos itens
-        />
-      </View>
+      // <View style={styles.container}>
+      //   <FlatList
+      //     contentContainerStyle={styles.list}
+      //     //colocar os itens abaixo quando tiver trazendo dados da API
+      //     //data={this.state.algumacoisa}
+      //     //keyExtractor={item=>item._id}
+      //     renderItem={this.renderItem}
+      //     onEndReachedThreshold={0.1} //Qual é o percentual que quero chegar do fim da lista para começar a carregar os novos itens
+      //   />
+      // </View>
     );
   }
 }

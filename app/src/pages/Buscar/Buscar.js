@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {CheckBox, SearchBar} from 'react-native-elements';
 import {View, TouchableOpacity,Text,StyleSheet,Slider,FlatList} from 'react-native';
-import { Container, Left } from 'native-base';
+import { Container, ListItem, Body  } from 'native-base';
 import  RadioForm from 'react-native-simple-radio-button';
+
+import BuscaController from '../../services/BuscaController';
+
 
 var radio_props = [
     {label: 'Serviço', value: 0 },
@@ -17,13 +20,25 @@ export default class Buscar extends Component{
 
     state={
         distancia: 1,
-        avaliacao: 1
+        avaliacao: 1,
+        listaCategoria: []
     };
+
+   
+    carregar = async () => {
+        const listaCategoria = await BuscaController.ListarCategoria();
+        this.setState({ listaCategoria:listaCategoria });
+    }
+
+    componentDidMount(){
+        this.carregar()
+    }
 
     
 
     render(){
         return(
+            
             <Container>
             
                 <SearchBar placeholder='Buscar ...' />
@@ -74,10 +89,26 @@ export default class Buscar extends Component{
 
                     </View>
 
+                    <View> 
+                        <Text style={styles.viewTextFiltro}>Categoria</Text>
+
+                        <View  style={styles.filtroText}>
+                            {this.state.listaCategoria.map((value, index) => ( <ListItem key={index}>
+                                <CheckBox checked={false} color="green"/>
+                                <Body>
+                                    <Text>{value.Descricao}</Text>
+                                </Body>
+                            </ListItem>))}
+
+                        </View>    
+                        
+
+                    </View>
+
                      
 
 
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('AnuncioDemanda');}}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('Listar1');}}>
                         <Text style={styles.buttonText}>Filtrar</Text>
                     </TouchableOpacity>                  
             
@@ -143,6 +174,14 @@ const styles = StyleSheet.create({
     boxSlides:{
         
         padding:10
+    },
+
+    filtroText: {
+        marginTop: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        color:'#000',
+        fontSize: 20,
     },
 
 });
