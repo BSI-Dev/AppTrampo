@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
 
 const Description = styled.Text`
   font-size: 12;
@@ -95,25 +96,27 @@ class ListaComponent extends Component{
 
                 <CardBody>
                     <BodyContainer>
-                        <Avatar source ={{uri: usuario.avatarUrl}}/>
+                        
+                            <Avatar source ={{uri: usuario.avatarUrl}}/>
 
-                        <DescriptionContainer>
-                            <Description>
-                                {usuario.Descricao}
-                            </Description>
-                        </DescriptionContainer>
+                            <DescriptionContainer>
+                                <Description>
+                                    {usuario.Descricao}
+                                </Description>
+                            </DescriptionContainer>
 
-                        <Actions>
-                            <TouchableOpacity onPress={() => this.setState({clicked : !clicked})}>
-                                {
-                                    clicked
-                                    ? <Icon name="minus-box-outline"   size={20} color="#000" />
-                                    : <Icon name="plus-box"   size={20} color="#000" />
-                                }
-                            </TouchableOpacity>
-                        </Actions>
-
+                            <Actions>
+                                <TouchableOpacity onPress={() => this.setState({clicked : !clicked})}>
+                                    {
+                                        clicked
+                                        ? <Icon name="minus-box-outline"   size={20} color="#000" />
+                                        : <Icon name="plus-box"   size={20} color="#000" />
+                                    }
+                                </TouchableOpacity>
+                            </Actions>
+                        
                     </BodyContainer>
+                    
                 </CardBody>
 
             </Card>
