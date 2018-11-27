@@ -18,7 +18,7 @@ import TabPrestador from './pages/Listar/TabPrestador'
 import Listar from './pages/Listar/Listar'
 import Login from './pages/Login/Login'
 import Cadastro from './pages/Cadastro/Cadastro'
-import Servico from './pages/Cadastro/Servico'
+//import Servico from './pages/Cadastro/Servico'
 
 
 import Perfil from './pages/Cadastro/Perfil'
@@ -28,7 +28,7 @@ import Demanda from './pages/Cadastro/Demanda'
 const StackPerfil = StackNavigator({
     Login: { screen: Login },
     Cadastro: { screen: Cadastro },
-    Servico: { screen: Servico },
+    //Servico: { screen: Servico },
 })
 
 
@@ -93,7 +93,7 @@ const Drawer = DrawerNavigator({
     }
   }, 
 },{
-  initialRouteName: 'Buscar',
+  initialRouteName: 'Demanda',
   drawerWidth: 300,
 })
 
@@ -118,7 +118,7 @@ export default Main = createStackNavigator({
           <MenuImage style="styles.bar" navigation={navigation}/>
       </TouchableOpacity>,
       headerStyle: {
-          backgroundColor: '#009624',
+          backgroundColor: '#43d751',
       },
       headerTintColor: '#fff'
   })

@@ -1,31 +1,31 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar } from 'react-native';
 
 export default class LoginForm extends Component {
-    render(){
-        return(
+    render() {
+        return (
             <View style={StyleSheet.container}>
                 <StatusBar
                     barStyle="light-content"
                 />
-                
-                <TextInput 
-                placeholder="email"
-                placeholderTextColor="rgba(0,0,0,0.7)"
-                returnKeyLabel = "next"
-                onSubmitEditing={()=>this.passwordInput.focus()}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={styles.input}
+
+                <TextInput
+                    placeholder="email"
+                    placeholderTextColor="rgba(0,0,0,0.7)"
+                    returnKeyLabel="next"
+                    onSubmitEditing={() => this.passwordInput.focus()}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    style={styles.input}
                 />
-                <TextInput 
-                placeholder="senha"
-                placeholderTextColor="rgba(0,0,0,0.7)"
-                returnKeyType="go"
-                secureTextEntry
-                style={styles.input}
-                ref={(input) => this.passwordInput = input}
+                <TextInput
+                    placeholder="senha"
+                    placeholderTextColor="rgba(0,0,0,0.7)"
+                    returnKeyType="go"
+                    secureTextEntry
+                    style={styles.input}
+                    ref={(input) => this.passwordInput = input}
                 />
 
 
@@ -39,11 +39,11 @@ export default class LoginForm extends Component {
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         padding: 20
     },
-   
-    input:{
+
+    input: {
         backgroundColor: 'rgba(255,255,255,0.7)',
         margin: 15,
         color: '#000000',
@@ -51,16 +51,16 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 1,
         borderRadius: 5,
-        paddingVertical:10
+        paddingVertical: 10
     },
-    buttonContainer:{
+    buttonContainer: {
         backgroundColor: '#95a5a6',
         paddingVertical: 15
     },
-    buttonText:{
+    buttonText: {
         textAlign: 'center',
         color: '#FFFFFF',
-        fontWeight:'700'
+        fontWeight: '700'
     }
 
 
