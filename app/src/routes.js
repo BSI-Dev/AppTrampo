@@ -101,7 +101,7 @@ const Drawer = DrawerNavigator({
   }
 
 },{
-  initialRouteName: 'Buscar',
+  initialRouteName: 'Demanda',
   drawerWidth: 300,
 })
 
@@ -126,7 +126,7 @@ export default Main = createStackNavigator({
           <MenuImage style="styles.bar" navigation={navigation}/>
       </TouchableOpacity>,
       headerStyle: {
-          backgroundColor: '#009624',
+          backgroundColor: '#43d751',
       },
       headerTintColor: '#fff'
   })
