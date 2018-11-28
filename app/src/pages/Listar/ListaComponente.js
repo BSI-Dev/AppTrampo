@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import { withNavigation } from 'react-navigation';
 
 const Description = styled.Text`
   font-size: 12;
@@ -80,6 +80,9 @@ class ListaComponent extends Component{
         };
     }
 
+    teste() {
+        this.props.navigation.navigate('AnuncioDemanda');
+    }
 
     render(){
         const { clicked } = this.state;
@@ -87,39 +90,42 @@ class ListaComponent extends Component{
 
 
         return(
-            <Card>
-                <CardHeader>
-                    <HeaderText>
-                        {usuario.ID} {usuario.Titulo}
-                    </HeaderText>
-                </CardHeader>
+            <TouchableOpacity onPress={() => {this.teste()}}>
+                <Card>
 
-                <CardBody>
-                    <BodyContainer>
+                    <CardHeader>
+                        <HeaderText>
+                            {usuario.ID} {usuario.Titulo}
+                        </HeaderText>
+                    </CardHeader>
+
+                    <CardBody>
+                        <BodyContainer>
+                            
+                                <Avatar source ={{uri: usuario.avatarUrl}}/>
+
+                                <DescriptionContainer>
+                                    <Description>
+                                        {usuario.Descricao}
+                                    </Description>
+                                </DescriptionContainer>
+
+                                <Actions>
+                                    <TouchableOpacity onPress={() => this.setState({clicked : !clicked})}>
+                                        {
+                                            clicked
+                                            ? <Icon name="minus-box-outline"   size={20} color="#000" />
+                                            : <Icon name="plus-box"   size={20} color="#000" />
+                                        }
+                                    </TouchableOpacity>
+                                </Actions>
+                            
+                        </BodyContainer>
                         
-                            <Avatar source ={{uri: usuario.avatarUrl}}/>
+                    </CardBody>
 
-                            <DescriptionContainer>
-                                <Description>
-                                    {usuario.Descricao}
-                                </Description>
-                            </DescriptionContainer>
-
-                            <Actions>
-                                <TouchableOpacity onPress={() => this.setState({clicked : !clicked})}>
-                                    {
-                                        clicked
-                                        ? <Icon name="minus-box-outline"   size={20} color="#000" />
-                                        : <Icon name="plus-box"   size={20} color="#000" />
-                                    }
-                                </TouchableOpacity>
-                            </Actions>
-                        
-                    </BodyContainer>
-                    
-                </CardBody>
-
-            </Card>
+                </Card>
+            </TouchableOpacity>
         );
 
     }
@@ -127,8 +133,8 @@ class ListaComponent extends Component{
 
 ListaComponent.propTypes = {
     usuario: PropTypes.shape({
-        ID : PropTypes.number.isRequired,
-        Titulo: PropTypes.string.isRequired,
+        ID : PropTypes.number,
+        Titulo: PropTypes.string,
         description: PropTypes.string,
         Descricao: PropTypes.string,
     }).isRequired,

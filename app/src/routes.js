@@ -36,7 +36,6 @@ const StackLista = StackNavigator({
     Listar: { screen: Listar },
     Listar1: {screen: Listar1},
     AnuncioDemanda: {screen: AnuncioDemanda},
-    //Item: { screen: Item },
 })
 
 

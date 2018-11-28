@@ -79,12 +79,14 @@ export default class Listar extends Component {
     </View>
   );
 
+   
+  
 
   render() {
     return (
       <ScrollView style={{ backgroundColor: "gray"}}>
         <Content>
-          {this.state.listaDemandas.map((value, index) => <ListaComponente usuario={value} key={index} />)}
+          {this.state.listaDemandas.map((value, index) => <ListaComponente  usuario={value} key={index} />)}
         </Content>
       </ScrollView>
 
