@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
-import { Image, Alert, Dimensions, StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { Modal, Image, Alert, Dimensions, StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Container, Accordion, List, ListItem, Body, Switch, Button, Textarea } from "native-base";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { RNCamera } from 'react-native-camera';
+import {
+  AnnotationContainer,
+  AnnotationText,
+  NewButtonContainer,
+  ButtonsWrapper,
+  CancelButtonContainer,
+  SelectButtonContainer,
+  ButtonText,
+  Marker,
+  ModalContainer,
+  ModalImagesListContainer,
+  ModalImagesList,
+  ModalImageItem,
+  ModalButtons,
+  CameraButtonContainer,
+  CancelButtonText,
+  ContinueButtonText,
+  TakePictureButtonContainer,
+  TakePictureButtonLabel,
+} from './styles';
 import PessoaController from '../../services/PessoaController';
 
 const window = Dimensions.get('window');
@@ -24,7 +45,11 @@ export default class Demanda extends Component {
     Titulo: "",
     Descricao: "",
     Habilitada: true,
-    imageURL: 'https://reactnativecode.com/wp-content/uploads/2017/10/Guitar.jpg'
+    imageURL: 'https://reactnativecode.com/wp-content/uploads/2017/10/Guitar.jpg',
+    newRealty: false,
+    cameraModalOpened: false,
+    dataModalOpened: false,
+    images: []
   }
 
   componentDidMount() {
@@ -116,20 +141,86 @@ export default class Demanda extends Component {
     return title
   }
 
+  handleCameraModalClose = () => this.setState({ cameraModalOpened: !this.state.cameraModalOpened })
+
+  handleDataModalClose = () => this.setState({
+    dataModalOpened: !this.state.dataModalOpened,
+    cameraModalOpened: false,
+  })
+
+  handleTakePicture = async () => {
+    
+    //if (this.camera) {
+    {
+      const options = { quality: 0.5, base64: true, forceUpOrientation: true, fixOrientation: true, };
+      const data = await this.camera.takePictureAsync(options)
+      
+      const { images } = this.state;
+      this.setState({ images: [...images, data]})
+      alert(1)
+    }
+  }
+
+  renderImagesList = () => (
+    this.state.images.length !== 0 ? (
+      <ModalImagesListContainer>
+        <ModalImagesList horizontal>
+          { this.state.images.map((value, index) => (
+            <View key={index}>
+              <ModalImageItem  source={{ uri: value.uri }} resizeMode="stretch" />
+              <ButtonText>
+                <Icon name="delete" size={20} />
+              </ButtonText>
+            </View>
+          ))}
+        </ModalImagesList>
+      </ModalImagesListContainer>
+    ) : null
+  )
+
+  renderCameraModal = () => (
+    <Modal
+      visible={this.state.cameraModalOpened}
+      transparent={false}
+      animationType="slide"
+      onRequestClose={this.handleCameraModalClose}
+    >
+      <ModalContainer>
+        <ModalContainer>
+          <RNCamera
+            ref={camera => {
+              this.camera = camera;
+            }}
+            style={{ flex: 1 }}
+            type={RNCamera.Constants.Type.back}
+            autoFocus={RNCamera.Constants.AutoFocus.on}
+            flashMode={RNCamera.Constants.FlashMode.off}
+            permissionDialogTitle={"Permission to use camera"}
+            permissionDialogMessage={
+              "We need your permission to use your camera phone"
+            }
+          />
+          <TakePictureButtonContainer onPress={this.handleTakePicture}>
+            <TakePictureButtonLabel />
+          </TakePictureButtonContainer>
+        </ModalContainer>
+        { this.renderImagesList() }
+        <ModalButtons>
+          <CameraButtonContainer onPress={this.handleCameraModalClose}>
+            <CancelButtonText>Cancelar</CancelButtonText>
+          </CameraButtonContainer>
+          <CameraButtonContainer onPress={this.handleDataModalClose}>
+            <ContinueButtonText>Continuar</ContinueButtonText>
+          </CameraButtonContainer>
+        </ModalButtons>
+      </ModalContainer>
+    </Modal>
+  )
+
   render() {
     return (
       <Container>
         
-        <RNCamera
-                ref={camera => { this.camera = camera }}
-                style = {styles.preview}
-                type={RNCamera.Constants.Type.back}
-                autoFocus={RNCamera.Constants.AutoFocus.on}
-                flashMode={RNCamera.Constants.FlashMode.off}
-                permissionDialogTitle={'Permission to use camera'}
-                permissionDialogMessage={'We need your permission to use your camera phone'}
-              />
-              
         <View style={{ backgroundColor: '#e4e6e4', flex: 1 }}>
           <View style={{ margin: 8, backgroundColor: '#FFF', flex: 1 }}>
 
@@ -174,13 +265,29 @@ export default class Demanda extends Component {
             </View>
 
             <View style={this.state.view != 1 ? styles.hide : null}>
-              <Text style={styles.tituloText}>Imagens</Text>
-              <TouchableOpacity onPress={this.takePicture} style={{backgroundColor:'red'}}>
+              <Text style={styles.tituloText}>
+                Imagens
+              </Text>
+              <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding:10,
+              }}>
+                <SelectButtonContainer onPress={this.handleCameraModalClose}>
+                  <ButtonText>
+                    <Icon name="camera" size={30} />
+                  </ButtonText>
+              </SelectButtonContainer>
+              </View>
+              
+              { this.renderCameraModal() }
+              {/*<TouchableOpacity onPress={this.takePicture} style={{backgroundColor:'red'}}>
                 <Text style={styles.buttonText}> SNAP </Text>
               </TouchableOpacity>
+              
               <View style={styles.logoContainer}>
                   <Image style={styles.logo} source= {{ uri: this.state.imageURL }}/>
-              </View>
+    </View>*/}
             </View>
 
             <View style={this.state.view != 2 ? styles.hide : null}>

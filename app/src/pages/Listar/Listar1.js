@@ -79,14 +79,19 @@ export default class Listar extends Component {
     </View>
   );
 
-   
+  teste(item) {
+    this.props.navigation.navigate('AnuncioDemanda', item);
+  }
   
 
   render() {
     return (
       <ScrollView style={{ backgroundColor: "gray"}}>
         <Content>
-          {this.state.listaDemandas.map((value, index) => <ListaComponente  usuario={value} key={index} />)}
+          {this.state.listaDemandas.map((value, index) => 
+            <TouchableOpacity onPress={() => {this.teste(value)}}>
+              <ListaComponente  usuario={value} key={index} />
+            </TouchableOpacity>)}
         </Content>
       </ScrollView>
 

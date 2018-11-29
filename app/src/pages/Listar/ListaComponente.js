@@ -71,8 +71,8 @@ const BodyContainer = styled.View`
 `;
 
 
-class ListaComponent extends Component{
-    constructor(props){
+class ListaComponent extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -80,52 +80,49 @@ class ListaComponent extends Component{
         };
     }
 
-    teste() {
-        this.props.navigation.navigate('AnuncioDemanda');
-    }
-
-    render(){
+ 
+    render() {
         const { clicked } = this.state;
         const { usuario } = this.props;
 
 
-        return(
-            <TouchableOpacity onPress={() => {this.teste()}}>
-                <Card>
+        return (
 
-                    <CardHeader>
-                        <HeaderText>
-                            {usuario.ID} {usuario.Titulo}
-                        </HeaderText>
-                    </CardHeader>
+            <Card>
 
-                    <CardBody>
-                        <BodyContainer>
-                            
-                                <Avatar source ={{uri: usuario.avatarUrl}}/>
+                <CardHeader>
+                    <HeaderText>
+                        {usuario.ID} {usuario.Titulo}
+                    </HeaderText>
+                </CardHeader>
 
-                                <DescriptionContainer>
-                                    <Description>
-                                        {usuario.Descricao}
-                                    </Description>
-                                </DescriptionContainer>
+                <CardBody>
+                    <BodyContainer>
 
-                                <Actions>
-                                    <TouchableOpacity onPress={() => this.setState({clicked : !clicked})}>
-                                        {
-                                            clicked
-                                            ? <Icon name="minus-box-outline"   size={20} color="#000" />
-                                            : <Icon name="plus-box"   size={20} color="#000" />
-                                        }
-                                    </TouchableOpacity>
-                                </Actions>
-                            
-                        </BodyContainer>
-                        
-                    </CardBody>
+                        <Avatar source={{ uri: usuario.avatarUrl }} />
 
-                </Card>
-            </TouchableOpacity>
+                        <DescriptionContainer>
+                            <Description>
+                                {usuario.Descricao}
+                            </Description>
+                        </DescriptionContainer>
+
+                        <Actions>
+                            <TouchableOpacity onPress={() => this.setState({ clicked: !clicked })}>
+                                {
+                                    clicked
+                                        ? <Icon name="minus-box-outline" size={20} color="#000" />
+                                        : <Icon name="plus-box" size={20} color="#000" />
+                                }
+                            </TouchableOpacity>
+                        </Actions>
+
+                    </BodyContainer>
+
+                </CardBody>
+
+            </Card>
+
         );
 
     }
@@ -133,10 +130,11 @@ class ListaComponent extends Component{
 
 ListaComponent.propTypes = {
     usuario: PropTypes.shape({
-        ID : PropTypes.number,
+        ID: PropTypes.number,
         Titulo: PropTypes.string,
         description: PropTypes.string,
         Descricao: PropTypes.string,
+        Telefone: PropTypes.string
     }).isRequired,
 };
 

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {CheckBox, SearchBar} from 'react-native-elements';
+import React, { Component } from 'react';
+import { CheckBox, SearchBar } from 'react-native-elements';
 import {
   Platform,
   StyleSheet,
@@ -27,136 +27,88 @@ import {
   Body,
   Spinner
 } from "native-base";
-import  RadioForm from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 
 
 
-export default class AnuncioDemanda extends Component{
-  static navigationOptions ={
+export default class AnuncioDemanda extends Component {
+
+  static navigationOptions = {
     header: null
   };
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     showText: false,
-  //     modalVisible: false
-  //   };
-  // }
-    render() {
-    return (
+  constructor(props) {
+    super(props);
+    this.state = {
+      showText: false,
+      modalVisible: false
+    };
+  }
+  render() {
 
+    const params = this.props.navigation.state.params;
+
+    return (
+      // <View>
+      //   <Text>{params.Titulo}</Text>
+      //   <Text>{params.Descricao}</Text>
+
+      // </View>
       <View>
-          <Header>
-            <Left>
-              <Button
-                transparent
-                onPress={() => {
-                  this.props.navigation.goBack();
-                }}
-              >
-                <Icon name="arrow-back" />
-              </Button>
-            </Left>
-            <Body>
-              <Title>Detalhes</Title>
-            </Body>
-            <Right>
-              <Button transparent>
-                <Icon name="md-share" />
-              </Button>
-              <Button transparent>
-                <Icon name="heart" />
-              </Button>
-            </Right>
-          </Header>
-          <View style={styles.container}>
-            <ScrollView style={styles.subContainer}>
-              <Image
-                style={styles.img}
-                source={{
-                  
-                  uri: "../../images/image1.jpg"
-                }}
-                onLoadStart={() => this.setState({ loading: true })}
-                onLoadEnd={() => {
-                  this.setState({ loading: false });
-                }}
-              >
-                {/* {this.state.loading && (
-                  <Spinner
-                    style={{
-                      marginTop: Dimensions.get("window").height / 10
-                    }}
-                    color="gray"
-                  />
-                )} */}
-              </Image>
-              <Card style={styles.detailsCard}>
-                <CardItem>
-                  <Body>
-                    <View style={{ flexDirection: "row" }}>
-                      <Text style={styles.userName}>
-                        Usuario
-                        {/* {users[0].name} */}
-                      </Text>
-                      <Button
-                        transparent
-                        // onPress={() =>
-                        //   this.props.navigation.navigate("Profile", {
-                        //     user: users[0]
-                        //   })
-                        // }
-                      >
-                        <Text>VIEW PROFILE</Text>
-                      </Button>
-                    </View>
-                    <Text style={styles.addTime}>Ad posted at 10:19 am</Text>
-                    <Text style={styles.price}>Rs 
-                      Preço
-                      {/* {product.price} */}
+
+        <View style={styles.container}>
+          <ScrollView style={styles.subContainer}>
+            <Image
+              style={styles.img}
+              source={{
+
+                uri: "../../images/image1.jpg"
+              }}
+              onLoadStart={() => this.setState({ loading: true })}
+              onLoadEnd={() => {
+                this.setState({ loading: false });
+              }}
+            >
+            </Image>
+            <Card style={styles.detailsCard}>
+              <CardItem>
+                <Body>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text style={styles.userName}>
+
+                      {params.Titulo}
                     </Text>
-                    <Text
+
+                  </View>
+                  {/* <Text style={styles.addTime}>Ad posted at 10:19 am</Text> */}
+                  {/* <Text style={styles.price}>Rs */}
+                    {/* Preço */}
+                      {/* {product.price} */}
+                  {/* </Text> */}
+                  
+                  
+                  <Text style={styles.description}>
+                  {params.Descricao}
+                    </Text>
+                  <View style={styles.footer}>
+                    <Button
+                      transparent
                       style={{
-                        fontSize: 14,
-                        borderBottomWidth: 0.5,
-                        borderBottomColor: "#d6d7da"
+                        alignSelf: "center"
                       }}
                     >
-                      Descrição
-                      {/* {product.description} */}
-                    </Text>
-                    <Text style={styles.address}>
-                      {/* {users[0].address} */}
-                      ,BTM Layout,Bangalore
-                    </Text>
-                    <Text style={styles.description}>
-                      Brand new Samsung galaxy S8 plus Black 4G LTE single sim
-                      64gb with 4gb ram Snapdragon processor Us imported with
-                      all accessories . No bill.Hence no warranty in india 100%
-                      percent best quality than Indian version. PRICE IS FIX
-                      Serious buyers can call
-                    </Text>
-                    <View style={styles.footer}>
-                      <Button
-                        transparent
-                        style={{
-                          alignSelf: "center"
-                        }}
-                      >
-                        <Text>SHARE</Text>
-                      </Button>
-                      <Button transparent style={{ alignSelf: "center" }}>
-                        <Text>REPORT</Text>
-                      </Button>
-                    </View>
-                  </Body>
-                </CardItem>
-              </Card>
-            </ScrollView>
-          </View>
+                    <Text>{params.Numero}</Text>
+                      <Text>Entrar em contato</Text>
+                    </Button>
+                    
+                  </View>
+                </Body>
+              </CardItem>
+            </Card>
+          </ScrollView>
         </View>
-      
+      </View>
+
     );
   }
 }
