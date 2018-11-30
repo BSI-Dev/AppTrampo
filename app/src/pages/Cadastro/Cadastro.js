@@ -158,7 +158,7 @@ export default class Cadastro extends Component {
                     <TouchableOpacity onPress={() => { this.selecionarServico(value.ID) }}>
                         <View style={lista.indexOf(value.ID) > -1 ? { backgroundColor: '#43d751', flex: 1 } : {}}>
                             <Text>
-                                {value.Descricao}
+                                {value.Nome}
                             </Text>
                         </View>
                     </TouchableOpacity>
@@ -172,7 +172,7 @@ export default class Cadastro extends Component {
         let lista = this.state.listaCategoria;
         let title = [];
         for (let i = 0; i < lista.length; i++) {
-            title.push({ title: lista[i].Descricao, content: lista })
+            title.push({ title: lista[i].Descricao, content: lista[i].Servicos })
         }
         return title
     }
