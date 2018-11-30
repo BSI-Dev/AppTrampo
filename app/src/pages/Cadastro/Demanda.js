@@ -4,6 +4,7 @@ import { Container, Accordion, List, ListItem, Body, Switch, Button, Textarea } 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { RNCamera } from 'react-native-camera';
 import {
+  DeleteButtonText,
   AnnotationContainer,
   AnnotationText,
   NewButtonContainer,
@@ -18,6 +19,7 @@ import {
   ModalImageItem,
   ModalButtons,
   CameraButtonContainer,
+  DeleteButtonContainer,
   CancelButtonText,
   ContinueButtonText,
   TakePictureButtonContainer,
@@ -122,7 +124,7 @@ export default class Demanda extends Component {
           <TouchableOpacity onPress={() => { this.selecionarServico(value.ID) }}>
             <View style={lista.indexOf(value.ID) > -1 ? { backgroundColor: '#43d751', flex: 1 } : {}}>
               <Text>
-                {value.Descricao}
+                {value.Nome}
               </Text>
             </View>
           </TouchableOpacity>
@@ -136,7 +138,7 @@ export default class Demanda extends Component {
     let lista = this.state.listaCategoria;
     let title = [];
     for (let i = 0; i < lista.length; i++) {
-      title.push({ title: lista[i].Descricao, content: lista })
+      title.push({ title: lista[i].Descricao, content: lista[i].Servicos  })
     }
     return title
   }
@@ -157,8 +159,13 @@ export default class Demanda extends Component {
       
       const { images } = this.state;
       this.setState({ images: [...images, data]})
-      alert(1)
     }
+  }
+
+  deletaImagem(index) {
+    const { images } = this.state;
+    images.splice(index, 1);
+    this.setState({ images: [...images]})
   }
 
   renderImagesList = () => (
@@ -168,9 +175,11 @@ export default class Demanda extends Component {
           { this.state.images.map((value, index) => (
             <View key={index}>
               <ModalImageItem  source={{ uri: value.uri }} resizeMode="stretch" />
-              <ButtonText>
-                <Icon name="delete" size={20} />
-              </ButtonText>
+              <DeleteButtonContainer onPress={ () => {this.deletaImagem(index)}}>
+                <DeleteButtonText>
+                    <Icon name="delete" size={20} />
+                </DeleteButtonText>     
+              </DeleteButtonContainer>              
             </View>
           ))}
         </ModalImagesList>
@@ -281,13 +290,8 @@ export default class Demanda extends Component {
               </View>
               
               { this.renderCameraModal() }
-              {/*<TouchableOpacity onPress={this.takePicture} style={{backgroundColor:'red'}}>
-                <Text style={styles.buttonText}> SNAP </Text>
-              </TouchableOpacity>
-              
-              <View style={styles.logoContainer}>
-                  <Image style={styles.logo} source= {{ uri: this.state.imageURL }}/>
-    </View>*/}
+              { this.renderImagesList()}
+             
             </View>
 
             <View style={this.state.view != 2 ? styles.hide : null}>
