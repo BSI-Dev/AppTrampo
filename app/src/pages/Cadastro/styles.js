@@ -77,13 +77,18 @@ const ModalImagesListContainer = styled.View``;
 
 const ModalImagesList = styled.ScrollView`
   paddingHorizontal: 10px;
-  paddingTop: 10px;
+  paddingTop: 40px;
 `;
 
 const ModalImageItem = styled.Image`
   height: 70px;
   width: 70px;
   marginRight: 10px;
+`;
+
+const ModalImagePerfil = styled.Image`
+  height: 160px;
+  width: 160px;
 `;
 
 const ModalButtons = styled.View`
@@ -98,6 +103,11 @@ const CameraButtonContainer = styled.TouchableHighlight`
   paddingHorizontal: 40px;
 `;
 
+const DeleteButtonContainer = styled.TouchableHighlight`
+  padding: 4px;
+  width: 70px;
+`;
+
 
 const CancelButtonText = styled.Text`
   color: #43d751;
@@ -107,6 +117,14 @@ const CancelButtonText = styled.Text`
 const ContinueButtonText = styled.Text`
   color: #43d751;
   fontSize: 16px;
+`;
+
+const DeleteButtonText = styled.Text`
+  color: #fff;
+  fontSize: 16px;
+  textAlign: center;
+  fontWeight: bold;
+  backgroundColor: #43d751;
 `;
 
 const TakePictureButtonContainer = styled.TouchableHighlight`
@@ -149,4 +167,7 @@ export {
   ContinueButtonText,
   TakePictureButtonContainer,
   TakePictureButtonLabel,
+  DeleteButtonText,
+  DeleteButtonContainer,
+  ModalImagePerfil
 };
