@@ -6,6 +6,8 @@ import  RadioForm from 'react-native-simple-radio-button';
 
 import BuscaController from '../../services/BuscaController';
 
+import MyCheckBox from '../UtilComponentes/MyCheckBox';
+
 
 var radio_props = [
     {label: 'Serviço', value: 0 },
@@ -21,10 +23,39 @@ export default class Buscar extends Component{
     state={
         distancia: 1,
         avaliacao: 1,
-        listaCategoria: []
+        listaCategoria: [],
+        filtro: 0,
+        lstCategoriasEscolhidas:[],
+        checkSelected: [],
     };
 
-   
+    addLista(id) {
+        if (lstCategoriasEscolhidas.indexOf(id) < 0) {
+            lstCategoriasEscolhidas.push(id)    
+        } else {
+           lstCategoriasEscolhidas.splice(id, 1) ;   
+        }
+    }
+
+    toggleCheckBox = (id, isCheck) => {
+        let { checkSelected } = this.state;
+        if (isCheck) {
+          checkSelected.push(id);
+        } else { // remove element
+          var index = checkSelected.indexOf(id);
+          if (index > -1) {
+            checkSelected.splice(index, 1);
+          }
+        }
+    
+        this.setState({ checkSelected });
+    
+        alert(this.state.checkSelected); // logging
+    }
+    teste() {
+        this.setState({ checked: !this.state.checked[index] })
+    }
+    
     carregar = async () => {
         const listaCategoria = await BuscaController.ListarCategoria();
         this.setState({ listaCategoria:listaCategoria });
@@ -75,7 +106,8 @@ export default class Buscar extends Component{
                         <RadioForm
                             radio_props={radio_props}
                             initial={0}
-                            onPress={(value) => {this.setState({value:value})}}
+                            onPress={(value) => {this.setState({value:value});
+                                    this.setState({filtro:value})}}
                             circleSize = {5}
                             buttonColor={'#009624'}
                             selectedButtonColor = {"#009624"}
@@ -94,9 +126,9 @@ export default class Buscar extends Component{
 
                         <View  style={styles.filtroText}>
                             {this.state.listaCategoria.map((value, index) => ( <ListItem key={index}>
-                                <CheckBox checked={false} color="green"/>
+                                <MyCheckBox onPress={(index, checked) =>this.toggleCheckBox(index, checked) } checked={this.state.checked} color="green"/>
                                 <Body>
-                                    <Text>{value.Descricao}</Text>
+                                    <Text style={styles.categoriaText}>{value.Descricao}</Text>
                                 </Body>
                             </ListItem>))}
 
@@ -108,7 +140,7 @@ export default class Buscar extends Component{
                      
 
 
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('Listar1');}}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {this.props.navigation.navigate('Listar1', this.state);}}>
                         <Text style={styles.buttonText}>Filtrar</Text>
                     </TouchableOpacity>                  
             
@@ -183,5 +215,10 @@ const styles = StyleSheet.create({
         color:'#000',
         fontSize: 20,
     },
+
+    categoriaText: {
+        paddingLeft :10,
+        color:'#000',
+    }
 
 });

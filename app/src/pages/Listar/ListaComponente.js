@@ -132,7 +132,6 @@ ListaComponent.propTypes = {
     usuario: PropTypes.shape({
         ID: PropTypes.number,
         Titulo: PropTypes.string,
-        description: PropTypes.string,
         Descricao: PropTypes.string,
         Telefone: PropTypes.string
     }).isRequired,

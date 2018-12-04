@@ -18,52 +18,37 @@ export default class Listar extends Component {
   static navigationOptions ={
     header: null
   };
-
+  constructor(props) {
+    super(props);
+  }
   //toda vez que há variação de estado, o método render é executado
   state = {
-    listaDemandas:[],
-    anuncioInfo:{}, //para guardar as informações do que é buscado da API ex.: Total de itens, páginas
-    docs:[],
-    page:1,
+    listaResults:[],
   };
-
+  
 
   carregar = async () => {
-    const listaDemandas = await ListarController.ListarDemandas();
-    this.setState({ listaDemandas:listaDemandas });
+    const params = this.props.navigation.state.params;
+    /*const listaResults = await ListarController.filtroListar(
+        params.filtro, 
+        params.listaCategoria[0],
+        params.distancia,
+        params.avaliacao
+        );    */
+       
+
+        const listaResults = await ListarController.ListarDemandas(
+          params.distancia,
+          params.listaCategoria[0].ID
+          );    
+  
+   this.setState({ listaResults:listaResults });
   }
 
   componentDidMount() {
       this.carregar()
   }
 
-  // componentDidMount(){
-  //   this.loadAnuncios();
-  // }
-  // //utilizando arrowfunction para poder enxergar o 'this'
-  // loadAnuncios = async (page = 1) => {
-  //   const response = await api.get('/demandas'); //colocar o caminho a partir da baseUrl que é pra buscar os itens
-  //   //const response = await api.get('/products?page=${page}');
-    
-  //   const {docs , ...anuncioInfo} = response.data;
-
-  //   this.setState({
-  //     docs : [...this.state.docs, ...docs],
-  //     anuncioInfo, 
-  //     page
-  //   });
-  // };
-
-  // //para carregar os demais itens no scroll
-  // loadMore = () => {
-  //   const  {page, anuncioInfo} = this.state;
-
-  //   if(page === anuncioInfo.pages) return;
-
-  //   const pageNumber = page + 1;
-
-  //   this.loadAnuncios(pageNumber);
-  // };
 
   renderItem=({item}) =>(
     <View style={styles.anuncioContainer}>
@@ -79,17 +64,23 @@ export default class Listar extends Component {
     </View>
   );
 
-  teste(item) {
+  enviarObjeto(item) {
     this.props.navigation.navigate('AnuncioDemanda', item);
   }
   
 
   render() {
+
+    const params = this.props.navigation.state.params;
+
+    
+
     return (
+      
       <ScrollView style={{ backgroundColor: "gray"}}>
         <Content>
-          {this.state.listaDemandas.map((value, index) => 
-            <TouchableOpacity onPress={() => {this.teste(value)}}>
+          {this.state.listaResults.map((value, index) => 
+            <TouchableOpacity onPress={() => {this.enviarObjeto(value)}}>
               <ListaComponente  usuario={value} key={index} />
             </TouchableOpacity>)}
         </Content>
