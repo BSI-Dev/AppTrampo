@@ -37,11 +37,13 @@ export default class Listar extends Component {
         );    */
        
 
-        const listaResults = await ListarController.ListarDemandas(
+        const listaResults = await ListarController.filtroListar(
+          params.filtro,
+          params.checkSelected[0].ID,
           params.distancia,
-          params.listaCategoria[0].ID
+          params.avaliacao
           );    
-  
+          alert(params.checkSelected[0].ID);
    this.setState({ listaResults:listaResults });
   }
 

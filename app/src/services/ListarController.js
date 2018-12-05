@@ -2,6 +2,7 @@ import api from '../services/api';
 
 
 async function ListarDemandas(distancia, categoria) {
+    
     try {
         const parametro = 'Categoria='+categoria+"&Distancia="+distancia;
         const response = await api.get('/demandas?'+parametro, {
@@ -19,7 +20,8 @@ async function ListarDemandas(distancia, categoria) {
 
 async function ListarProfissionais(categoria, distancia, avaliacao) {
     try {
-        const response = await api.get('/profissionais/${distancia}/${avaliacao}/${categoria}', {
+        const parametro = 'Distancia='+distancia+'&Avaliacao='+avaliacao+'&Categoria='+categoria;
+        const response = await api.get('/profissionais/'+parametro, {
             headers: {
                 'Access-Control-Expose-Headers': 'Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization',
                 'Access-Control-Allow-Origin':"*",
@@ -35,11 +37,11 @@ async function ListarProfissionais(categoria, distancia, avaliacao) {
 async function filtroListar(tipo, categoria, distancia, avaliacao){
     switch (tipo) {
         case 0:
-        ListarProfissionais(categoria, distancia, avaliacao);    
+            ListarProfissionais(categoria, distancia, avaliacao);    
             break;
     
         case 1:
-        ListarDemandas(distancia,categoria);
+            ListarDemandas(distancia,categoria);
             break;
     }
     

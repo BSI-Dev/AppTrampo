@@ -38,7 +38,7 @@ export default class Buscar extends Component{
     }
 
     toggleCheckBox = (id, isCheck) => {
-        let { checkSelected } = this.state;
+        let { checkSelected } = this.state.checkSelected;
         if (isCheck) {
           checkSelected.push(id);
         } else { // remove element
