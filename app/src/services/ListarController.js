@@ -1,10 +1,10 @@
 import api from '../services/api';
 
 
-async function ListarDemandas(distancia, categoria) {
+async function ListarDemandas(distancia, categorias) {
     
     try {
-        const parametro = 'Categoria='+categoria+"&Distancia="+distancia;
+        const parametro = 'Categoria='+categorias+"&Distancia="+distancia;
         const response = await api.get('/demandas?'+parametro, {
             headers: {
                 'Access-Control-Expose-Headers': 'Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization',
@@ -18,9 +18,9 @@ async function ListarDemandas(distancia, categoria) {
     }
 }
 
-async function ListarProfissionais(categoria, distancia, avaliacao) {
+async function ListarProfissionais(categorias, distancia, avaliacao) {
     try {
-        const parametro = 'Distancia='+distancia+'&Avaliacao='+avaliacao+'&Categoria='+categoria;
+        const parametro = 'Distancia='+distancia+'&Avaliacao='+avaliacao+'&Categoria='+categorias;
         const response = await api.get('/profissionais/'+parametro, {
             headers: {
                 'Access-Control-Expose-Headers': 'Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization',
@@ -34,14 +34,14 @@ async function ListarProfissionais(categoria, distancia, avaliacao) {
     }
 }
 
-async function filtroListar(tipo, categoria, distancia, avaliacao){
+async function filtroListar(tipo, categorias, distancia, avaliacao){
     switch (tipo) {
         case 0:
-            ListarProfissionais(categoria, distancia, avaliacao);    
+            await ListarProfissionais(categorias, distancia, avaliacao);    
             break;
     
         case 1:
-            ListarDemandas(distancia,categoria);
+            await ListarDemandas(distancia, categorias);
             break;
     }
     

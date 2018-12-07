@@ -36,15 +36,20 @@ export default class Listar extends Component {
         params.avaliacao
         );    */
        
+        const listaResults = await ListarController.ListarDemandas(
+          params.distancia,
+          params.checkSelected.toString(),
+          ); 
 
-        const listaResults = await ListarController.filtroListar(
+        /*const listaResults = await ListarController.filtroListar(
           params.filtro,
-          params.checkSelected[0].ID,
+          params.checkSelected.toString(),
           params.distancia,
           params.avaliacao
-          );    
-          alert(params.checkSelected[0].ID);
-   this.setState({ listaResults:listaResults });
+          );    */
+          //alert(params.checkSelected[0].ID);
+        //alert(listaResults)
+         this.setState({ listaResults:listaResults });
   }
 
   componentDidMount() {
@@ -82,8 +87,8 @@ export default class Listar extends Component {
       <ScrollView style={{ backgroundColor: "gray"}}>
         <Content>
           {this.state.listaResults.map((value, index) => 
-            <TouchableOpacity onPress={() => {this.enviarObjeto(value)}}>
-              <ListaComponente  usuario={value} key={index} />
+            <TouchableOpacity key={index} onPress={() => {this.enviarObjeto(value)}}>
+              <ListaComponente  usuario={value}  />
             </TouchableOpacity>)}
         </Content>
       </ScrollView>

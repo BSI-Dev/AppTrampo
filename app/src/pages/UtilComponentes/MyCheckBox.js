@@ -12,6 +12,7 @@ class MyCheckBox extends Component {
       isCheck: !prevState.isCheck,
     })); // setState is async function.
 
+    this.props.myPress(this.props.myIndex, this.state.isCheck);
     // Call function type prop with return values.
     this.props.clicked && this.props.clicked(this.props.value, this.state.isCheck);
   }
