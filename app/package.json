@@ -8,7 +8,11 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "consolidate": "^0.15.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
     "native-base": "^2.8.0",
+    "paypal-rest-sdk": "^1.8.1",
     "prop-types": "^15.6.2",
     "react": "16.5.0",
     "react-native": "0.57.0",

@@ -24,6 +24,7 @@ import Cadastro from './pages/Cadastro/Cadastro'
 import Perfil from './pages/Cadastro/Perfil'
 import Demanda from './pages/Cadastro/Demanda'
 import Cartao from './pages/Cartao/Cartao'
+import Pagamento from './pages/Cartao/Pagamento'
 import AnuncioDemanda from './pages/Anuncio/AnuncioDemanda'
 
 const StackPerfil = StackNavigator({
@@ -97,6 +98,12 @@ const Drawer = DrawerNavigator({
     screen: Cartao,
     navigationOptions: {
       title:'Pacote'
+    }
+  },
+  Pagamento: {
+    screen: Pagamento,
+    navigationOptions: {
+      title:'TestePayPal'
     }
   }
 
