@@ -23,7 +23,7 @@ export default class App extends React.Component {
                     onRequestClose={() => this.setState({ showModal: false })}
                 >
                     <WebView
-                        source={{ uri: "http://localhost:3000" }}
+                        source={{ uri: "https://api-paypal-node-jonathan92.c9users.io/"}}
                         onNavigationStateChange={data =>
                             this.handleResponse(data)
                         }
