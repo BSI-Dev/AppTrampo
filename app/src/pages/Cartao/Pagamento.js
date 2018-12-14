@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Modal, WebView, Image, StyleSheet } from "react-native";
 
+
 export default class App extends React.Component {
     state = {
         showModal: false,

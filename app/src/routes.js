@@ -94,16 +94,16 @@ const Drawer = DrawerNavigator({
       title: 'Demanda'
     }
   },
-  Cartao: {
-    screen: Cartao,
-    navigationOptions: {
-      title:'Pacote'
-    }
-  },
+  // Cartao: {
+  //   screen: Cartao,
+  //   navigationOptions: {
+  //     title:'Pacote'
+  //   }
+  // },
   Pagamento: {
     screen: Pagamento,
     navigationOptions: {
-      title:'TestePayPal'
+      title:'Destaque'
     }
   }
 
